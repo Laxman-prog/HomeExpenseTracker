@@ -1,8 +1,10 @@
-﻿using HomeExpenseUI.Forms;
+﻿using HomeExpenseUI.Datbase;
+using HomeExpenseUI.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -11,6 +13,8 @@ namespace HomeExpenseUI
 {
     public partial class DashBoard : Form
     {
+        readonly SqlConnection conn = new SqlConnection(@"Data Source=Laxman;Initial Catalog=HomeExpense;Integrated Security=True");
+
         private Form currentChildForm; 
         public DashBoard()
         {
@@ -84,12 +88,15 @@ namespace HomeExpenseUI
 
         private void exitApp_Click(object sender, EventArgs e)
         {
+            LoginInfo.UserName = null;
+            LoginInfo.Password= null;
             Application.Exit();
         }
 
         private void addIncomeSubMenuButton_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new IncomeInsertionForm());
+            var incomeInsertion = new IncomeInsertionForm(conn);
+            OpenChildForm(incomeInsertion);
         }
 
         private void todaysReportSubmenuButton_Click(object sender, EventArgs e)
