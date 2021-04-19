@@ -412,14 +412,14 @@ namespace HomeExpenseUI
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(250, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(599, 40);
+            this.panel3.Size = new System.Drawing.Size(698, 40);
             this.panel3.TabIndex = 1;
             // 
             // currentDateTimePicker
             // 
             this.currentDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.currentDateTimePicker.CalendarMonthBackground = System.Drawing.SystemColors.HotTrack;
-            this.currentDateTimePicker.Location = new System.Drawing.Point(454, 6);
+            this.currentDateTimePicker.Location = new System.Drawing.Point(553, 6);
             this.currentDateTimePicker.Name = "currentDateTimePicker";
             this.currentDateTimePicker.Size = new System.Drawing.Size(142, 25);
             this.currentDateTimePicker.TabIndex = 0;
@@ -430,7 +430,7 @@ namespace HomeExpenseUI
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(250, 40);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(599, 9);
+            this.panel1.Size = new System.Drawing.Size(698, 9);
             this.panel1.TabIndex = 2;
             // 
             // panelDektop
@@ -439,14 +439,14 @@ namespace HomeExpenseUI
             this.panelDektop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDektop.Location = new System.Drawing.Point(250, 49);
             this.panelDektop.Name = "panelDektop";
-            this.panelDektop.Size = new System.Drawing.Size(599, 519);
+            this.panelDektop.Size = new System.Drawing.Size(698, 519);
             this.panelDektop.TabIndex = 3;
             // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(849, 568);
+            this.ClientSize = new System.Drawing.Size(948, 568);
             this.Controls.Add(this.panelDektop);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);

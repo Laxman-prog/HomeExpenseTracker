@@ -9,23 +9,38 @@ namespace HomeExpenseUI
 {
     public class Authintication
     {
-        SqlConnection conn = new SqlConnection(@"Data Source=Laxman;Initial Catalog=HomeExpense;Integrated Security=True");
-        public bool IsValidUser(string userName, string password)
+        public bool IsValidUser(string userName, string password, SqlConnection conn)
         {
-         
-                SqlCommand loginCommand = new SqlCommand("Select * from UserLogin where UserName='"+userName+"'and Password='"+password+"'", conn);
+            try
+            {
+
+                SqlCommand loginCommand = new SqlCommand("Select * from UserLogin where UserName='" + userName + "'and Password='" + password + "'", conn);
                 loginCommand.CommandType = CommandType.Text;
                 conn.Open();
                 SqlDataReader sqlDataReader = loginCommand.ExecuteReader();
+
                 if (sqlDataReader.HasRows)
                 {
+                    conn.Close();
                     return true;
+
                 }
                 else
-                  return false;
+                {
+                    conn.Close();
+                    return false;
+
+                }
+            }
+            catch(Exception e)
+            {
+                conn.Close();
+                MessageBox.Show(e.Message);
+                return false;
+            }
 
         }
-        public bool RegisterUser(string userName, string password, string gmail)
+        public bool RegisterUser(string userName, string password, string gmail, SqlConnection conn)
         {
             try
             {
@@ -42,6 +57,7 @@ namespace HomeExpenseUI
             }
             catch (Exception e)
             {
+                conn.Close();
                 MessageBox.Show(e.Message);
                 return false;
             }
