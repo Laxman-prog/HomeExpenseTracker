@@ -1,7 +1,7 @@
 ﻿
 namespace HomeExpenseUI.Forms
 {
-    partial class IncomeInsertionForm
+    partial class ExpenseInsertion
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace HomeExpenseUI.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this._sourceTypeDropdown = new System.Windows.Forms.ComboBox();
+            this._expenseTypeDropdown = new System.Windows.Forms.ComboBox();
             this.incomeDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.cancelIncomeButton = new System.Windows.Forms.Button();
@@ -40,7 +40,7 @@ namespace HomeExpenseUI.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this._sourceNameDropdown = new System.Windows.Forms.ComboBox();
-            this.incomeValueTextbox = new System.Windows.Forms.TextBox();
+            this.expenseValueTextbox = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.addNewOptionCancel = new System.Windows.Forms.Button();
             this.addNewOptionButton = new System.Windows.Forms.Button();
@@ -56,12 +56,12 @@ namespace HomeExpenseUI.Forms
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 45);
-            this.panel1.TabIndex = 1;
+            this.panel1.TabIndex = 2;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this._sourceTypeDropdown);
+            this.panel2.Controls.Add(this._expenseTypeDropdown);
             this.panel2.Controls.Add(this.incomeDateTimePicker);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.cancelIncomeButton);
@@ -69,12 +69,12 @@ namespace HomeExpenseUI.Forms
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this._sourceNameDropdown);
-            this.panel2.Controls.Add(this.incomeValueTextbox);
+            this.panel2.Controls.Add(this.expenseValueTextbox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(375, 405);
-            this.panel2.TabIndex = 2;
+            this.panel2.TabIndex = 3;
             // 
             // label5
             // 
@@ -83,19 +83,18 @@ namespace HomeExpenseUI.Forms
             this.label5.ForeColor = System.Drawing.SystemColors.Menu;
             this.label5.Location = new System.Drawing.Point(33, 141);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 17);
+            this.label5.Size = new System.Drawing.Size(87, 17);
             this.label5.TabIndex = 9;
-            this.label5.Text = " Source Type";
+            this.label5.Text = "Expense Type";
             // 
-            // _sourceTypeDropdown
+            // _expenseTypeDropdown
             // 
-            this._sourceTypeDropdown.FormattingEnabled = true;
-            this._sourceTypeDropdown.Location = new System.Drawing.Point(132, 139);
-            this._sourceTypeDropdown.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this._sourceTypeDropdown.Name = "_sourceTypeDropdown";
-            this._sourceTypeDropdown.Size = new System.Drawing.Size(182, 23);
-            this._sourceTypeDropdown.TabIndex = 8;
-            this._sourceTypeDropdown.SelectedIndexChanged += new System.EventHandler(this.SourceTypeDropdown_SelectedIndexChanged);
+            this._expenseTypeDropdown.FormattingEnabled = true;
+            this._expenseTypeDropdown.Location = new System.Drawing.Point(132, 139);
+            this._expenseTypeDropdown.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
+            this._expenseTypeDropdown.Name = "_expenseTypeDropdown";
+            this._expenseTypeDropdown.Size = new System.Drawing.Size(182, 23);
+            this._expenseTypeDropdown.TabIndex = 8;
             // 
             // incomeDateTimePicker
             // 
@@ -132,7 +131,6 @@ namespace HomeExpenseUI.Forms
             this.submitIncomeButton.TabIndex = 4;
             this.submitIncomeButton.Text = "Submit";
             this.submitIncomeButton.UseVisualStyleBackColor = true;
-            this.submitIncomeButton.Click += new System.EventHandler(this.SubmitIncomeButton_Click);
             // 
             // label2
             // 
@@ -150,11 +148,11 @@ namespace HomeExpenseUI.Forms
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label1.Location = new System.Drawing.Point(33, 85);
+            this.label1.Location = new System.Drawing.Point(31, 85);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 17);
+            this.label1.Size = new System.Drawing.Size(100, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Select Source";
+            this.label1.Text = "Expense Source";
             // 
             // _sourceNameDropdown
             // 
@@ -164,14 +162,13 @@ namespace HomeExpenseUI.Forms
             this._sourceNameDropdown.Name = "_sourceNameDropdown";
             this._sourceNameDropdown.Size = new System.Drawing.Size(182, 23);
             this._sourceNameDropdown.TabIndex = 1;
-            this._sourceNameDropdown.SelectedIndexChanged += new System.EventHandler(this.SourceNameDropdown_SelectedIndexChanged);
             // 
-            // incomeValueTextbox
+            // expenseValueTextbox
             // 
-            this.incomeValueTextbox.Location = new System.Drawing.Point(132, 197);
-            this.incomeValueTextbox.Name = "incomeValueTextbox";
-            this.incomeValueTextbox.Size = new System.Drawing.Size(182, 23);
-            this.incomeValueTextbox.TabIndex = 0;
+            this.expenseValueTextbox.Location = new System.Drawing.Point(132, 197);
+            this.expenseValueTextbox.Name = "expenseValueTextbox";
+            this.expenseValueTextbox.Size = new System.Drawing.Size(182, 23);
+            this.expenseValueTextbox.TabIndex = 0;
             // 
             // panel3
             // 
@@ -183,7 +180,7 @@ namespace HomeExpenseUI.Forms
             this.panel3.Location = new System.Drawing.Point(375, 45);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(425, 405);
-            this.panel3.TabIndex = 3;
+            this.panel3.TabIndex = 4;
             // 
             // addNewOptionCancel
             // 
@@ -202,7 +199,6 @@ namespace HomeExpenseUI.Forms
             this.addNewOptionButton.TabIndex = 8;
             this.addNewOptionButton.Text = "Add";
             this.addNewOptionButton.UseVisualStyleBackColor = true;
-            this.addNewOptionButton.Click += new System.EventHandler(this.AddNewOptionButton_Click);
             // 
             // addNewOption
             // 
@@ -222,7 +218,7 @@ namespace HomeExpenseUI.Forms
             this.addNewOptionTextBox.Size = new System.Drawing.Size(182, 23);
             this.addNewOptionTextBox.TabIndex = 8;
             // 
-            // IncomeInsertionForm
+            // ExpenseInsertion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -231,9 +227,8 @@ namespace HomeExpenseUI.Forms
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "IncomeInsertionForm";
-            this.Text = "IncomeForm";
-            this.Load += new System.EventHandler(this.IncomeInsertionForm_Load);
+            this.Name = "ExpenseInsertion";
+            this.Text = "ExpenseInsertion";
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -246,6 +241,8 @@ namespace HomeExpenseUI.Forms
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox _expenseTypeDropdown;
         private System.Windows.Forms.DateTimePicker incomeDateTimePicker;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button cancelIncomeButton;
@@ -253,13 +250,11 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox _sourceNameDropdown;
-        private System.Windows.Forms.TextBox incomeValueTextbox;
+        private System.Windows.Forms.TextBox expenseValueTextbox;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button addNewOptionCancel;
         private System.Windows.Forms.Button addNewOptionButton;
         private System.Windows.Forms.Label addNewOption;
         private System.Windows.Forms.TextBox addNewOptionTextBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox _sourceTypeDropdown;
     }
 }

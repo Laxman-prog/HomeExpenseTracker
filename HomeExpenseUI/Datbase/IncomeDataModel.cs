@@ -9,33 +9,67 @@ namespace HomeExpenseUI.Datbase
 {
     public class IncomeDataModel
     {
-        internal List<string> GetDropdownsMenusfromDb(SqlConnection sqlConnection)
+        internal static bool AddMenutoDb(SqlConnection conn, string sourcName, string sourceType)
+        {
+            var userName = LoginInfo.UserName;
+            try
+            {
+                SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable VALUES (@UserName, @SourceName, @SourceType)", conn);
+
+                // SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable (UserName, "+ columnName+") VALUES ('" + userName + "','" + menuName+"')", conn);
+                insertCommand.CommandType = CommandType.Text;
+                insertCommand.Parameters.AddWithValue("@UserName", userName);
+                insertCommand.Parameters.AddWithValue("@SourceName", sourcName);
+                insertCommand.Parameters.AddWithValue("@SourceType", sourceType);
+                //insertCommand.Parameters.AddWithValue("@Date", dateTime);
+                //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
+                //insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
+                //insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourcName;
+                //insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value = soutceType;
+                conn.Open();
+                insertCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "Stack" + e.StackTrace);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        internal List<string> GetMenuNamesfromDb(SqlConnection sqlConnection,string columName)
         {
             List<string> menus= new List<string>();
             string userName = LoginInfo.UserName;
             try
             {
-                SqlCommand command = new SqlCommand("Select IncomeSourceNames from [SubIncomeTable] where userName=@userName", sqlConnection);
+
+                SqlCommand command = new ("Select DISTINCT " + columName + " from [IncomeMenuTable] where UserName=@UserName", sqlConnection);
                 command.CommandType = CommandType.Text;
-                command.Parameters.AddWithValue("@userName", userName);
+                command.Parameters.AddWithValue("@UserName", userName);
                 sqlConnection.Open();
                 using var reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        menus = (List<string>)reader["IncomeSourceNames"];
-                        sqlConnection.Close();
+                        var myString = reader.GetString(0); //The 0 stands for "the 0'th column", so the first column of the result.
+                        menus.Add(myString);
                     }
 
                 }
             }
             catch(Exception e)
             {
-                sqlConnection.Close();
-                MessageBox.Show(e.Message);
+                MessageBox.Show(e.Message+"stack" + e.StackTrace);
             }
-
+            finally
+            {
+                sqlConnection.Close();
+            }
             return menus;          
         }
 
@@ -50,7 +84,7 @@ namespace HomeExpenseUI.Datbase
                 sw.Write(menusList);
                 if (!IsUserPresentInDb(sqlConnection, userName))
                 {
-                    SqlCommand insertCommand = new SqlCommand("INSERT INTO IncomeSubTable VALUES (@userName, @menus)", sqlConnection);
+                    SqlCommand insertCommand = new SqlCommand("INSERT INTO IncomeTable VALUES (@userName, @menus)", sqlConnection);
 
                     //  SqlCommand insertCommand = new SqlCommand("INSERT INTO SubIncomeTable(IncomeSourceNames) VALUES (@VarBinary)", sqlConnection);
                     insertCommand.Parameters.AddWithValue("@userName", userName);
@@ -60,7 +94,6 @@ namespace HomeExpenseUI.Datbase
 
                     sqlConnection.Open();
                     insertCommand.ExecuteNonQuery();
-                    sqlConnection.Close();
                 }
                 else
                 {
@@ -74,14 +107,15 @@ namespace HomeExpenseUI.Datbase
 
                     sqlConnection.Open();
                     insertCommand.ExecuteNonQuery();
-                    sqlConnection.Close();
                 }
             }
             catch (Exception e)
             {
-                sqlConnection.Close();
                 MessageBox.Show(e.Message+"stack"+e.StackTrace);
-              
+            }
+            finally
+            {
+                sqlConnection.Close();
             }
         }
         private bool IsUserPresentInDb(SqlConnection sqlConnection, string userName)
@@ -95,21 +129,56 @@ namespace HomeExpenseUI.Datbase
 
                 if (reader.HasRows)
                 {
-                    sqlConnection.Close();
                     return true;
                 }
                 else
                 {
-                    sqlConnection.Close();
                     return false;
 
                 }
             }
             catch(Exception e)
             {
-                sqlConnection.Close();
                 MessageBox.Show(e.Message + "stack" + e.StackTrace);
                 return false;
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
+        internal static bool InsertIncomeDetailsToDb(SqlConnection conn, string sourceName, string sourceType,
+            DateTime dateTime,string incomeValue)
+        {
+            var userName = LoginInfo.UserName;
+            try
+            {
+                SqlCommand insertCommand = new("INSERT INTO IncomeTable VALUES (@UserName, @SourceName, @SourceType, @Date, @MoneyValue)", conn);
+                //insertCommand.CommandType = CommandType.Text;
+                //insertCommand.Parameters.AddWithValue("@UserName", userName);
+                //insertCommand.Parameters.AddWithValue("@SourceName", sourceName);
+                //insertCommand.Parameters.AddWithValue("@SourceType", sourceType);
+                //insertCommand.Parameters.AddWithValue("@Date", dateTime);
+                //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
+                insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
+                insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourceName;
+                insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value =sourceType;
+                insertCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime;
+                insertCommand.Parameters.Add("@MoneyValue", SqlDbType.VarChar).Value = incomeValue;
+                conn.Open();
+                insertCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception e)
+            {
+               
+                MessageBox.Show(e.Message+"Stack"+e.StackTrace);
+                return false;
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -125,22 +194,23 @@ namespace HomeExpenseUI.Datbase
 
                 if (sqlDataReader.HasRows)
                 {
-                    conn.Close();
                     return true;
 
                 }
                 else
                 {
-                    conn.Close();
                     return false;
 
                 }
             }
             catch (Exception e)
             {
-                conn.Close();
                 MessageBox.Show(e.Message);
                 return false;
+            }
+            finally
+            {
+                conn.Close();
             }
 
         }

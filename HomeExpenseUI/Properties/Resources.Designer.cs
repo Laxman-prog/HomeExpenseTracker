@@ -81,6 +81,24 @@ namespace HomeExpenseUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IncomeNameMenu {
+            get {
+                return ResourceManager.GetString("IncomeNameMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string IncomeSourceTypeMenu {
+            get {
+                return ResourceManager.GetString("IncomeSourceTypeMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap login_icon {

@@ -2,13 +2,35 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>AnyCPU;x64</Platforms>
     <SignAssembly>false</SignAssembly>
     <DelaySign></DelaySign>
     <AssemblyOriginatorKeyFile />
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Database.mdf" />
+    <None Remove="Database_log.ldf" />
+    <None Remove="Properties\IncomeNameMenu.txt" />
+    <None Remove="Properties\IncomeSourceTypeMenu.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database.mdf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Database_log.ldf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Properties\IncomeNameMenu.txt" />
+    <Content Include="Properties\IncomeSourceTypeMenu.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Images\" />
