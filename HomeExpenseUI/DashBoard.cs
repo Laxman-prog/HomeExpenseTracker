@@ -13,16 +13,19 @@ namespace HomeExpenseUI
 {
     public partial class DashBoard : Form
     {
-        readonly SqlConnection conn = new (@"Data Source=Laxman;Initial Catalog=HomeExpense;Integrated Security=True");
+        readonly SqlConnection conn;
         readonly Form _parentForm;
         private Form currentChildForm; 
         public DashBoard(Form parentForm)
         {
             _parentForm = parentForm;
-           
+            conn = (parentForm as LoginForm).conn;
             InitializeComponent();
             HideSumMenus();
             userNameLabel.Text = LoginInfo.UserName;
+            _parentForm.Visible = false;
+            var incomeInsertion = new HomeForm(conn);
+            OpenChildForm(incomeInsertion);
         }
 
         private void HideSumMenus()
@@ -122,7 +125,16 @@ namespace HomeExpenseUI
 
         private void AddExpenseSubmenuButton_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ExpenseInsertion());
+            OpenChildForm(new ExpenseInsertion(conn));
+        }
+
+        private void AppIconPictureBox_Click(object sender, EventArgs e)
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+            }
+            currentformButton.Text = "Home";
         }
     }
 }

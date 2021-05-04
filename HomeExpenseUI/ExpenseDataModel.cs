@@ -7,14 +7,14 @@ using System.Windows;
 
 namespace HomeExpenseUI.Datbase
 {
-    public class IncomeDataModel
+    class ExpenseDataModel
     {
-        public static bool AddMenutoDb(SqlConnection conn, string sourcName, string sourceType)
+        internal static bool AddMenutoDb(SqlConnection conn, string sourcName, string sourceType)
         {
             var userName = LoginInfo.UserName;
             try
             {
-                SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable VALUES (@UserName, @SourceName, @SourceType)", conn);
+                SqlCommand insertCommand = new("INSERT INTO ExpenseMenuTable VALUES (@UserName, @SourceName, @SourceType)", conn);
 
                 // SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable (UserName, "+ columnName+") VALUES ('" + userName + "','" + menuName+"')", conn);
                 insertCommand.CommandType = CommandType.Text;
@@ -30,7 +30,7 @@ namespace HomeExpenseUI.Datbase
                 insertCommand.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return false;
             }
@@ -39,14 +39,14 @@ namespace HomeExpenseUI.Datbase
                 conn.Close();
             }
         }
-        public List<string> GetMenuNamesfromDb(SqlConnection sqlConnection,string columName)
+        internal static List<string> GetMenuNamesfromDb(SqlConnection sqlConnection, string columName)
         {
-            List<string> menus= new List<string>();
+            List<string> menus = new();
             string userName = LoginInfo.UserName;
             try
             {
 
-                SqlCommand command = new ("Select DISTINCT " + columName + " from [IncomeMenuTable] where UserName=@UserName", sqlConnection);
+                SqlCommand command = new("Select DISTINCT " + columName + " from [ExpenseMenuTable] where UserName=@UserName", sqlConnection);
                 command.CommandType = CommandType.Text;
                 command.Parameters.AddWithValue("@UserName", userName);
                 sqlConnection.Open();
@@ -61,24 +61,24 @@ namespace HomeExpenseUI.Datbase
 
                 }
             }
-            catch(Exception )
+            catch (Exception)
             {
             }
             finally
             {
                 sqlConnection.Close();
             }
-            return menus;          
+            return menus;
         }
 
 
-        public static bool InsertIncomeDetailsToDb(SqlConnection conn, string sourceName, string sourceType,
-            DateTime dateTime,string incomeValue)
+        internal static bool InsertExpenseDetailsToDb(SqlConnection conn, string sourceName, string sourceType,
+            DateTime dateTime, string incomeValue)
         {
             var userName = LoginInfo.UserName;
             try
             {
-                SqlCommand insertCommand = new("INSERT INTO IncomeTable VALUES (@UserName, @SourceName, @SourceType, @Date, @MoneyValue)", conn);
+                SqlCommand insertCommand = new("INSERT INTO ExpenseTable VALUES (@UserName, @SourceName, @SourceType, @Date, @MoneyValue)", conn);
                 //insertCommand.CommandType = CommandType.Text;
                 //insertCommand.Parameters.AddWithValue("@UserName", userName);
                 //insertCommand.Parameters.AddWithValue("@SourceName", sourceName);
@@ -87,16 +87,15 @@ namespace HomeExpenseUI.Datbase
                 //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
                 insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
                 insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourceName;
-                insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value =sourceType;
+                insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value = sourceType;
                 insertCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime;
                 insertCommand.Parameters.Add("@MoneyValue", SqlDbType.VarChar).Value = incomeValue;
                 conn.Open();
                 insertCommand.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception )
+            catch (Exception)
             {
-               
                 return false;
             }
             finally
@@ -104,6 +103,5 @@ namespace HomeExpenseUI.Datbase
                 conn.Close();
             }
         }
-
     }
 }

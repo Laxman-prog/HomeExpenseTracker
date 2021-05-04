@@ -10,12 +10,16 @@ namespace HomeExpenseUI
     {
         static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
 
-        readonly SqlConnection conn = new (ConnectionString);
+        public readonly SqlConnection conn = new (ConnectionString);
         public LoginForm()
         {
             InitializeComponent();
         }
-
+        public void Alert(string msg, Form_Alert.enmType type)
+        {
+            Form_Alert frm = new Form_Alert();
+            frm.showAlert(msg, type);
+        }
         private void LoginButton_Click(object sender, EventArgs e)
         {
             Authintication authintication = new();
@@ -27,6 +31,7 @@ namespace HomeExpenseUI
                 dashBoard.Show();
                 userNameTextBox.Clear();
                 passwordTextBox.Clear();
+                this.Alert("Success Alert", Form_Alert.enmType.Success);
             }
             else
             {

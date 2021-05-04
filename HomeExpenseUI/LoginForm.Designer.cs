@@ -283,7 +283,6 @@ namespace HomeExpenseUI
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button signInButton;
-        private System.Windows.Forms.TextBox gmailText;
         private System.Windows.Forms.Label gmailLabel;
         private System.Windows.Forms.TextBox gmailTextBox;
         private System.Windows.Forms.Button addAcountButton;
