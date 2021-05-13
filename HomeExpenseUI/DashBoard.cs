@@ -135,6 +135,9 @@ namespace HomeExpenseUI
                 currentChildForm.Close();
             }
             currentformButton.Text = "Home";
+            var incomeInsertion = new HomeForm(conn);
+            OpenChildForm(incomeInsertion);
         }
+
     }
 }

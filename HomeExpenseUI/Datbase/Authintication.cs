@@ -13,7 +13,6 @@ namespace HomeExpenseUI
         {
             try
             {
-
                 SqlCommand loginCommand = new ("Select * from UserLogin where UserName='" + userName + "'and Password='" + password + "'", conn);
                 loginCommand.CommandType = CommandType.Text;
                 conn.Open();
@@ -38,7 +37,8 @@ namespace HomeExpenseUI
                 MessageBox.Show(e.Message);
                 return false;
             }
-
+        
+    
         }
         public bool RegisterUser(string userName, string password, string gmail, SqlConnection conn)
         {

@@ -14,6 +14,8 @@ namespace HomeExpenseUI
         public LoginForm()
         {
             InitializeComponent();
+            countryListCombo.Items.AddRange(Localization.GetCountryList().ToArray());
+            countryListCombo.SelectedItem = "India";
         }
         public void Alert(string msg, Form_Alert.enmType type)
         {
@@ -78,6 +80,11 @@ namespace HomeExpenseUI
             {
                 MessageBox.Show("User name exists. Please try another user name");
             }
+        }
+
+        private void countryListCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

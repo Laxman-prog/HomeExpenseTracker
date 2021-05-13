@@ -101,6 +101,11 @@ namespace HomeExpenseUI.Forms
             // incomeValueNumbox
             // 
             this.incomeValueNumbox.Location = new System.Drawing.Point(132, 199);
+            this.incomeValueNumbox.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
             this.incomeValueNumbox.Name = "incomeValueNumbox";
             this.incomeValueNumbox.Size = new System.Drawing.Size(182, 23);
             this.incomeValueNumbox.TabIndex = 10;

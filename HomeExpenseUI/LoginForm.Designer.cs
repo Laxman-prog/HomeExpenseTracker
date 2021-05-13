@@ -48,6 +48,8 @@ namespace HomeExpenseUI
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.countryListCombo = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -85,6 +87,8 @@ namespace HomeExpenseUI
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.countryListCombo);
             this.groupBox1.Controls.Add(this.addAcountButton);
             this.groupBox1.Controls.Add(this.gmailTextBox);
             this.groupBox1.Controls.Add(this.gmailLabel);
@@ -123,7 +127,7 @@ namespace HomeExpenseUI
             this.gmailLabel.AutoSize = true;
             this.gmailLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gmailLabel.ForeColor = System.Drawing.SystemColors.Menu;
-            this.gmailLabel.Location = new System.Drawing.Point(41, 154);
+            this.gmailLabel.Location = new System.Drawing.Point(35, 154);
             this.gmailLabel.Name = "gmailLabel";
             this.gmailLabel.Size = new System.Drawing.Size(51, 21);
             this.gmailLabel.TabIndex = 9;
@@ -244,6 +248,26 @@ namespace HomeExpenseUI
             this.label6.TabIndex = 2;
             this.label6.Text = "User Name";
             // 
+            // countryListCombo
+            // 
+            this.countryListCombo.FormattingEnabled = true;
+            this.countryListCombo.Location = new System.Drawing.Point(150, 39);
+            this.countryListCombo.Name = "countryListCombo";
+            this.countryListCombo.Size = new System.Drawing.Size(244, 23);
+            this.countryListCombo.TabIndex = 12;
+            this.countryListCombo.SelectedIndexChanged += new System.EventHandler(this.countryListCombo_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.Menu;
+            this.label3.Location = new System.Drawing.Point(35, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(111, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Select Country";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -286,6 +310,8 @@ namespace HomeExpenseUI
         private System.Windows.Forms.Label gmailLabel;
         private System.Windows.Forms.TextBox gmailTextBox;
         private System.Windows.Forms.Button addAcountButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox countryListCombo;
     }
 }
 

@@ -30,10 +30,13 @@ namespace HomeExpenseUI.Forms
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.TestButton = new System.Windows.Forms.Button();
+            this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
+            this.totalBalamceValue = new System.Windows.Forms.Label();
+            this.totalExpenseValue = new System.Windows.Forms.Label();
+            this.previousAmountValue = new System.Windows.Forms.Label();
+            this.totalIncomeValue = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,10 +48,13 @@ namespace HomeExpenseUI.Forms
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
+            this.panel1.Controls.Add(this.TestButton);
+            this.panel1.Controls.Add(this.dateTimePickerDate);
+            this.panel1.Controls.Add(this.totalBalamceValue);
+            this.panel1.Controls.Add(this.totalExpenseValue);
+            this.panel1.Controls.Add(this.previousAmountValue);
+            this.panel1.Controls.Add(this.totalIncomeValue);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -60,45 +66,77 @@ namespace HomeExpenseUI.Forms
             this.panel1.Size = new System.Drawing.Size(800, 231);
             this.panel1.TabIndex = 0;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label8.Location = new System.Drawing.Point(262, 204);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(25, 15);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "000";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label7.Location = new System.Drawing.Point(262, 168);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(25, 15);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "000";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label6.Location = new System.Drawing.Point(262, 132);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(25, 15);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "000";
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label5.Location = new System.Drawing.Point(262, 96);
+            this.label5.Location = new System.Drawing.Point(444, 45);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(25, 15);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "000";
+            this.label5.Size = new System.Drawing.Size(77, 15);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Select Month";
+            // 
+            // TestButton
+            // 
+            this.TestButton.BackColor = System.Drawing.Color.SeaGreen;
+            this.TestButton.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.TestButton.FlatAppearance.BorderSize = 0;
+            this.TestButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TestButton.ForeColor = System.Drawing.SystemColors.Menu;
+            this.TestButton.Location = new System.Drawing.Point(491, 132);
+            this.TestButton.Name = "TestButton";
+            this.TestButton.Size = new System.Drawing.Size(109, 35);
+            this.TestButton.TabIndex = 20;
+            this.TestButton.Text = "Load Data";
+            this.TestButton.UseVisualStyleBackColor = false;
+            this.TestButton.Click += new System.EventHandler(this.TestButton_Click);
+            // 
+            // dateTimePickerDate
+            // 
+            this.dateTimePickerDate.Location = new System.Drawing.Point(444, 79);
+            this.dateTimePickerDate.Name = "dateTimePickerDate";
+            this.dateTimePickerDate.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePickerDate.TabIndex = 18;
+            // 
+            // totalBalamceValue
+            // 
+            this.totalBalamceValue.AutoSize = true;
+            this.totalBalamceValue.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalBalamceValue.Location = new System.Drawing.Point(262, 204);
+            this.totalBalamceValue.Name = "totalBalamceValue";
+            this.totalBalamceValue.Size = new System.Drawing.Size(25, 15);
+            this.totalBalamceValue.TabIndex = 17;
+            this.totalBalamceValue.Text = "000";
+            // 
+            // totalExpenseValue
+            // 
+            this.totalExpenseValue.AutoSize = true;
+            this.totalExpenseValue.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalExpenseValue.Location = new System.Drawing.Point(262, 168);
+            this.totalExpenseValue.Name = "totalExpenseValue";
+            this.totalExpenseValue.Size = new System.Drawing.Size(25, 15);
+            this.totalExpenseValue.TabIndex = 16;
+            this.totalExpenseValue.Text = "000";
+            // 
+            // previousAmountValue
+            // 
+            this.previousAmountValue.AutoSize = true;
+            this.previousAmountValue.ForeColor = System.Drawing.SystemColors.Menu;
+            this.previousAmountValue.Location = new System.Drawing.Point(262, 132);
+            this.previousAmountValue.Name = "previousAmountValue";
+            this.previousAmountValue.Size = new System.Drawing.Size(25, 15);
+            this.previousAmountValue.TabIndex = 15;
+            this.previousAmountValue.Text = "000";
+            // 
+            // totalIncomeValue
+            // 
+            this.totalIncomeValue.AutoSize = true;
+            this.totalIncomeValue.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalIncomeValue.Location = new System.Drawing.Point(262, 96);
+            this.totalIncomeValue.Name = "totalIncomeValue";
+            this.totalIncomeValue.Size = new System.Drawing.Size(25, 15);
+            this.totalIncomeValue.TabIndex = 14;
+            this.totalIncomeValue.Text = "000";
             // 
             // label4
             // 
@@ -194,14 +232,17 @@ namespace HomeExpenseUI.Forms
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label totalBalamceValue;
+        private System.Windows.Forms.Label totalExpenseValue;
+        private System.Windows.Forms.Label previousAmountValue;
+        private System.Windows.Forms.Label totalIncomeValue;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label totalIncomeLabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button TestButton;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDate;
+        private System.Windows.Forms.Label label5;
     }
 }
