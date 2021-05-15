@@ -49,8 +49,11 @@ namespace HomeExpenseUI
             this.appName = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.currentDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.currentformButton = new FontAwesome.Sharp.IconButton();
+            this.userNameLabel = new System.Windows.Forms.Label();
+            this.logOutButton = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panelDektop = new System.Windows.Forms.Panel();
             this.panelSideview.SuspendLayout();
             this.reportPnael.SuspendLayout();
@@ -59,6 +62,7 @@ namespace HomeExpenseUI
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
+            this.panelDektop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSideview
@@ -99,7 +103,7 @@ namespace HomeExpenseUI
             this.exitApp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.exitApp.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.exitApp.UseVisualStyleBackColor = true;
-            this.exitApp.Click += new System.EventHandler(this.exitApp_Click);
+            this.exitApp.Click += new System.EventHandler(this.ExitApp_Click);
             // 
             // reportPnael
             // 
@@ -252,6 +256,7 @@ namespace HomeExpenseUI
             this.addExpenseSubmenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addExpenseSubmenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addExpenseSubmenuButton.UseVisualStyleBackColor = true;
+            this.addExpenseSubmenuButton.Click += new System.EventHandler(this.AddExpenseSubmenuButton_Click);
             // 
             // expenseMenuButton
             // 
@@ -306,6 +311,7 @@ namespace HomeExpenseUI
             this.showIncomeSubMenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showIncomeSubMenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showIncomeSubMenuButton.UseVisualStyleBackColor = true;
+            this.showIncomeSubMenuButton.Click += new System.EventHandler(this.showIncomeSubMenuButton_Click);
             // 
             // addIncomeSubMenuButton
             // 
@@ -327,7 +333,7 @@ namespace HomeExpenseUI
             this.addIncomeSubMenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.addIncomeSubMenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.addIncomeSubMenuButton.UseVisualStyleBackColor = true;
-            this.addIncomeSubMenuButton.Click += new System.EventHandler(this.addIncomeSubMenuButton_Click);
+            this.addIncomeSubMenuButton.Click += new System.EventHandler(this.AddIncomeSubMenuButton_Click);
             // 
             // icomeMenuButton
             // 
@@ -375,6 +381,7 @@ namespace HomeExpenseUI
             this.iconPictureBox1.Size = new System.Drawing.Size(86, 76);
             this.iconPictureBox1.TabIndex = 1;
             this.iconPictureBox1.TabStop = false;
+            this.iconPictureBox1.Click += new System.EventHandler(this.AppIconPictureBox_Click);
             // 
             // appName
             // 
@@ -408,21 +415,68 @@ namespace HomeExpenseUI
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.panel3.Controls.Add(this.currentDateTimePicker);
+            this.panel3.Controls.Add(this.currentformButton);
+            this.panel3.Controls.Add(this.userNameLabel);
+            this.panel3.Controls.Add(this.logOutButton);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(250, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(698, 40);
             this.panel3.TabIndex = 1;
             // 
-            // currentDateTimePicker
+            // currentformButton
             // 
-            this.currentDateTimePicker.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.currentDateTimePicker.CalendarMonthBackground = System.Drawing.SystemColors.HotTrack;
-            this.currentDateTimePicker.Location = new System.Drawing.Point(553, 6);
-            this.currentDateTimePicker.Name = "currentDateTimePicker";
-            this.currentDateTimePicker.Size = new System.Drawing.Size(142, 25);
-            this.currentDateTimePicker.TabIndex = 0;
+            this.currentformButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.currentformButton.FlatAppearance.BorderSize = 0;
+            this.currentformButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.currentformButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.currentformButton.IconChar = FontAwesome.Sharp.IconChar.Home;
+            this.currentformButton.IconColor = System.Drawing.Color.White;
+            this.currentformButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.currentformButton.IconSize = 24;
+            this.currentformButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.currentformButton.Location = new System.Drawing.Point(0, 0);
+            this.currentformButton.Name = "currentformButton";
+            this.currentformButton.Size = new System.Drawing.Size(99, 40);
+            this.currentformButton.TabIndex = 8;
+            this.currentformButton.Text = "Home";
+            this.currentformButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.currentformButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.currentformButton.UseVisualStyleBackColor = true;
+            // 
+            // userNameLabel
+            // 
+            this.userNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.userNameLabel.AutoSize = true;
+            this.userNameLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.userNameLabel.Location = new System.Drawing.Point(503, 13);
+            this.userNameLabel.Name = "userNameLabel";
+            this.userNameLabel.Size = new System.Drawing.Size(74, 17);
+            this.userNameLabel.TabIndex = 9;
+            this.userNameLabel.Text = "User Name";
+            // 
+            // logOutButton
+            // 
+            this.logOutButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.logOutButton.FlatAppearance.BorderSize = 0;
+            this.logOutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.logOutButton.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.logOutButton.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
+            this.logOutButton.IconColor = System.Drawing.Color.White;
+            this.logOutButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.logOutButton.IconSize = 24;
+            this.logOutButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.logOutButton.Location = new System.Drawing.Point(599, 0);
+            this.logOutButton.Name = "logOutButton";
+            this.logOutButton.Size = new System.Drawing.Size(99, 40);
+            this.logOutButton.TabIndex = 8;
+            this.logOutButton.Text = "Log Out";
+            this.logOutButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.logOutButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.logOutButton.UseVisualStyleBackColor = true;
+            this.logOutButton.Click += new System.EventHandler(this.LogOutButton_Click);
             // 
             // panel1
             // 
@@ -433,9 +487,19 @@ namespace HomeExpenseUI
             this.panel1.Size = new System.Drawing.Size(698, 9);
             this.panel1.TabIndex = 2;
             // 
+            // panel2
+            // 
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
+            this.panel2.Size = new System.Drawing.Size(698, 519);
+            this.panel2.TabIndex = 9;
+            // 
             // panelDektop
             // 
             this.panelDektop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.panelDektop.Controls.Add(this.panel2);
             this.panelDektop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDektop.Location = new System.Drawing.Point(250, 49);
             this.panelDektop.Name = "panelDektop";
@@ -453,6 +517,7 @@ namespace HomeExpenseUI
             this.Controls.Add(this.panelSideview);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "DashBoard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DashBoard";
             this.Load += new System.EventHandler(this.DashBoard_Load);
             this.panelSideview.ResumeLayout(false);
@@ -463,6 +528,8 @@ namespace HomeExpenseUI
             this.panelLogo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panelDektop.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -488,10 +555,13 @@ namespace HomeExpenseUI
         private FontAwesome.Sharp.IconButton icomeMenuButton;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker currentDateTimePicker;
         private System.Windows.Forms.Label appName;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private System.Windows.Forms.Panel panel1;
+        private FontAwesome.Sharp.IconButton logOutButton;
+        private System.Windows.Forms.Label userNameLabel;
+        private FontAwesome.Sharp.IconButton currentformButton;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelDektop;
     }
 }

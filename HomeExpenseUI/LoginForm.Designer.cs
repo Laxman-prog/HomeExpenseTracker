@@ -40,7 +40,6 @@ namespace HomeExpenseUI
             this.cancelButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -49,6 +48,8 @@ namespace HomeExpenseUI
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.countryListCombo = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -65,6 +66,7 @@ namespace HomeExpenseUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.Menu;
             this.label1.Location = new System.Drawing.Point(35, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 21);
@@ -75,6 +77,7 @@ namespace HomeExpenseUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.SystemColors.Menu;
             this.label2.Location = new System.Drawing.Point(35, 116);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 21);
@@ -83,7 +86,9 @@ namespace HomeExpenseUI
             // 
             // groupBox1
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(33)))), ((int)(((byte)(74)))));
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.countryListCombo);
             this.groupBox1.Controls.Add(this.addAcountButton);
             this.groupBox1.Controls.Add(this.gmailTextBox);
             this.groupBox1.Controls.Add(this.gmailLabel);
@@ -91,7 +96,6 @@ namespace HomeExpenseUI
             this.groupBox1.Controls.Add(this.cancelButton);
             this.groupBox1.Controls.Add(this.loginButton);
             this.groupBox1.Controls.Add(this.passwordTextBox);
-            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.userNameTextBox);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -109,7 +113,7 @@ namespace HomeExpenseUI
             this.addAcountButton.TabIndex = 11;
             this.addAcountButton.Text = "Add Account";
             this.addAcountButton.UseVisualStyleBackColor = true;
-            this.addAcountButton.Click += new System.EventHandler(this.addAccountButton_Click);
+            this.addAcountButton.Click += new System.EventHandler(this.AddAccountButton_Click);
             // 
             // gmailTextBox
             // 
@@ -122,7 +126,8 @@ namespace HomeExpenseUI
             // 
             this.gmailLabel.AutoSize = true;
             this.gmailLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gmailLabel.Location = new System.Drawing.Point(41, 154);
+            this.gmailLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.gmailLabel.Location = new System.Drawing.Point(35, 154);
             this.gmailLabel.Name = "gmailLabel";
             this.gmailLabel.Size = new System.Drawing.Size(51, 21);
             this.gmailLabel.TabIndex = 9;
@@ -130,13 +135,13 @@ namespace HomeExpenseUI
             // 
             // signInButton
             // 
-            this.signInButton.Location = new System.Drawing.Point(178, 250);
+            this.signInButton.Location = new System.Drawing.Point(150, 250);
             this.signInButton.Name = "signInButton";
             this.signInButton.Size = new System.Drawing.Size(91, 34);
             this.signInButton.TabIndex = 8;
             this.signInButton.Text = "Sign-In";
             this.signInButton.UseVisualStyleBackColor = true;
-            this.signInButton.Click += new System.EventHandler(this.signIn_Click);
+            this.signInButton.Click += new System.EventHandler(this.SignIn_Click);
             // 
             // cancelButton
             // 
@@ -146,17 +151,17 @@ namespace HomeExpenseUI
             this.cancelButton.TabIndex = 7;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(178, 195);
+            this.loginButton.Location = new System.Drawing.Point(150, 195);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(91, 34);
             this.loginButton.TabIndex = 6;
             this.loginButton.Text = "Login";
             this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.loginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
             // passwordTextBox
             // 
@@ -165,15 +170,6 @@ namespace HomeExpenseUI
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(244, 23);
             this.passwordTextBox.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(95, 38);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Welcome!!! Track Your Expenses";
             // 
             // pictureBox1
             // 
@@ -252,15 +248,36 @@ namespace HomeExpenseUI
             this.label6.TabIndex = 2;
             this.label6.Text = "User Name";
             // 
+            // countryListCombo
+            // 
+            this.countryListCombo.FormattingEnabled = true;
+            this.countryListCombo.Location = new System.Drawing.Point(150, 39);
+            this.countryListCombo.Name = "countryListCombo";
+            this.countryListCombo.Size = new System.Drawing.Size(244, 23);
+            this.countryListCombo.TabIndex = 12;
+            this.countryListCombo.SelectedIndexChanged += new System.EventHandler(this.countryListCombo_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.Menu;
+            this.label3.Location = new System.Drawing.Point(35, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(111, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Select Country";
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(618, 293);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -278,7 +295,6 @@ namespace HomeExpenseUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button cancelButton;
@@ -291,10 +307,11 @@ namespace HomeExpenseUI
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button signInButton;
-        private System.Windows.Forms.TextBox gmailText;
         private System.Windows.Forms.Label gmailLabel;
         private System.Windows.Forms.TextBox gmailTextBox;
         private System.Windows.Forms.Button addAcountButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox countryListCombo;
     }
 }
 

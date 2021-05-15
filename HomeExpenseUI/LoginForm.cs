@@ -1,4 +1,5 @@
 ﻿using HomeExpenseUI.Datbase;
+using HomeExpenseUI.Forms;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -9,37 +10,45 @@ namespace HomeExpenseUI
     {
         static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["connection_string"].ConnectionString;
 
-        readonly SqlConnection conn = new SqlConnection(ConnectionString);
+        public readonly SqlConnection conn = new (ConnectionString);
         public LoginForm()
         {
             InitializeComponent();
+            countryListCombo.Items.AddRange(Localization.GetCountryList().ToArray());
+            countryListCombo.SelectedItem = "India";
         }
-
-        private void loginButton_Click(object sender, EventArgs e)
+        public void Alert(string msg, Form_Alert.enmType type)
         {
-            Authintication authintication = new Authintication();
+            Form_Alert frm = new Form_Alert();
+            frm.showAlert(msg, type);
+        }
+        private void LoginButton_Click(object sender, EventArgs e)
+        {
+            Authintication authintication = new();
             if (authintication.IsValidUser(userNameTextBox.Text, passwordTextBox.Text, conn))
             {
                 LoginInfo.UserName = userNameTextBox.Text;
                 LoginInfo.Password = passwordTextBox.Text;
-                //MessageBox.Show("Welcome!!!" + userNameTextBox.Text);
-                DashBoard dashBoard = new DashBoard();
+                DashBoard dashBoard = new (this);
                 dashBoard.Show();
+                userNameTextBox.Clear();
+                passwordTextBox.Clear();
+                this.Alert("Success Alert", Form_Alert.enmType.Success);
             }
             else
             {
-                MessageBox.Show("Invalid Username or Password");
+                MessageBox.Show("Invalid Username or Password.");
             }
             //DashBoard dashBoard = new DashBoard();
             //dashBoard.Show();
         }
 
-        private void cancelButton_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void signIn_Click(object sender, EventArgs e)
+        private void SignIn_Click(object sender, EventArgs e)
         {
             gmailLabel.Show();
             gmailTextBox.Show();
@@ -57,9 +66,9 @@ namespace HomeExpenseUI
             
         }
 
-        private void addAccountButton_Click(object sender, EventArgs e)
+        private void AddAccountButton_Click(object sender, EventArgs e)
         {
-            Authintication authintication = new Authintication();
+            Authintication authintication = new ();
             if (authintication.RegisterUser(userNameTextBox.Text, passwordTextBox.Text, gmailTextBox.Text,conn))
             {
                 MessageBox.Show("Registered Successfully. Please Go to Login");
@@ -71,6 +80,11 @@ namespace HomeExpenseUI
             {
                 MessageBox.Show("User name exists. Please try another user name");
             }
+        }
+
+        private void countryListCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

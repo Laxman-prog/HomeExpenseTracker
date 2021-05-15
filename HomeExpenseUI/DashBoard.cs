@@ -13,13 +13,19 @@ namespace HomeExpenseUI
 {
     public partial class DashBoard : Form
     {
-        readonly SqlConnection conn = new SqlConnection(@"Data Source=Laxman;Initial Catalog=HomeExpense;Integrated Security=True");
-
+        readonly SqlConnection conn;
+        readonly Form _parentForm;
         private Form currentChildForm; 
-        public DashBoard()
+        public DashBoard(Form parentForm)
         {
+            _parentForm = parentForm;
+            conn = (parentForm as LoginForm).conn;
             InitializeComponent();
             HideSumMenus();
+            userNameLabel.Text = LoginInfo.UserName;
+            _parentForm.Visible = false;
+            var incomeInsertion = new HomeForm(conn);
+            OpenChildForm(incomeInsertion);
         }
 
         private void HideSumMenus()
@@ -67,8 +73,6 @@ namespace HomeExpenseUI
 
         private void DashBoard_Load(object sender, EventArgs e)
         {
-            currentDateTimePicker.Format = DateTimePickerFormat.Custom;
-            currentDateTimePicker.CalendarTitleBackColor = Color.FromArgb(32, 34, 39);
         }
 
         private void icomeMenuButton_Click(object sender, EventArgs e)
@@ -86,14 +90,16 @@ namespace HomeExpenseUI
             ShowHideSubmenu(reportPnael);
         }
 
-        private void exitApp_Click(object sender, EventArgs e)
+        private void ExitApp_Click(object sender, EventArgs e)
         {
             LoginInfo.UserName = null;
             LoginInfo.Password= null;
+            this.Close();
+            _parentForm.Close();
             Application.Exit();
         }
 
-        private void addIncomeSubMenuButton_Click(object sender, EventArgs e)
+        private void AddIncomeSubMenuButton_Click(object sender, EventArgs e)
         {
             var incomeInsertion = new IncomeInsertionForm(conn);
             OpenChildForm(incomeInsertion);
@@ -107,6 +113,35 @@ namespace HomeExpenseUI
         private void montlyReportSubmenuButton_Click(object sender, EventArgs e)
         {
             OpenChildForm(new MontlyReportForm());
+        }
+
+        private void LogOutButton_Click(object sender, EventArgs e)
+        {
+            LoginInfo.UserName = null;
+            LoginInfo.Password = null;
+            _parentForm.Show();
+            this.Close();
+        }
+
+        private void AddExpenseSubmenuButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ExpenseInsertion(conn));
+        }
+
+        private void AppIconPictureBox_Click(object sender, EventArgs e)
+        {
+            if (currentChildForm != null)
+            {
+                currentChildForm.Close();
+            }
+            currentformButton.Text = "Home";
+            var incomeInsertion = new HomeForm(conn);
+            OpenChildForm(incomeInsertion);
+        }
+
+        private void showIncomeSubMenuButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ShowIncomes(conn));
         }
     }
 }
