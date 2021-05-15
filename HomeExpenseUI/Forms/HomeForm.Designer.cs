@@ -33,13 +33,13 @@ namespace HomeExpenseUI.Forms
             this.label5 = new System.Windows.Forms.Label();
             this.TestButton = new System.Windows.Forms.Button();
             this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
-            this.totalBalamceValue = new System.Windows.Forms.Label();
+            this.totalBalanceValue = new System.Windows.Forms.Label();
             this.totalExpenseValue = new System.Windows.Forms.Label();
             this.previousAmountValue = new System.Windows.Forms.Label();
             this.totalIncomeValue = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.totalBalanceLabel = new System.Windows.Forms.Label();
+            this.totalExpenseLabel = new System.Windows.Forms.Label();
+            this.previouAmountLabel = new System.Windows.Forms.Label();
             this.totalIncomeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,19 +51,19 @@ namespace HomeExpenseUI.Forms
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.TestButton);
             this.panel1.Controls.Add(this.dateTimePickerDate);
-            this.panel1.Controls.Add(this.totalBalamceValue);
+            this.panel1.Controls.Add(this.totalBalanceValue);
             this.panel1.Controls.Add(this.totalExpenseValue);
             this.panel1.Controls.Add(this.previousAmountValue);
             this.panel1.Controls.Add(this.totalIncomeValue);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.totalBalanceLabel);
+            this.panel1.Controls.Add(this.totalExpenseLabel);
+            this.panel1.Controls.Add(this.previouAmountLabel);
             this.panel1.Controls.Add(this.totalIncomeLabel);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 231);
+            this.panel1.Size = new System.Drawing.Size(800, 281);
             this.panel1.TabIndex = 0;
             // 
             // label5
@@ -98,15 +98,15 @@ namespace HomeExpenseUI.Forms
             this.dateTimePickerDate.Size = new System.Drawing.Size(200, 23);
             this.dateTimePickerDate.TabIndex = 18;
             // 
-            // totalBalamceValue
+            // totalBalanceValue
             // 
-            this.totalBalamceValue.AutoSize = true;
-            this.totalBalamceValue.ForeColor = System.Drawing.SystemColors.Menu;
-            this.totalBalamceValue.Location = new System.Drawing.Point(262, 204);
-            this.totalBalamceValue.Name = "totalBalamceValue";
-            this.totalBalamceValue.Size = new System.Drawing.Size(25, 15);
-            this.totalBalamceValue.TabIndex = 17;
-            this.totalBalamceValue.Text = "000";
+            this.totalBalanceValue.AutoSize = true;
+            this.totalBalanceValue.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalBalanceValue.Location = new System.Drawing.Point(262, 204);
+            this.totalBalanceValue.Name = "totalBalanceValue";
+            this.totalBalanceValue.Size = new System.Drawing.Size(25, 15);
+            this.totalBalanceValue.TabIndex = 17;
+            this.totalBalanceValue.Text = "000";
             // 
             // totalExpenseValue
             // 
@@ -138,44 +138,44 @@ namespace HomeExpenseUI.Forms
             this.totalIncomeValue.TabIndex = 14;
             this.totalIncomeValue.Text = "000";
             // 
-            // label4
+            // totalBalanceLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label4.Location = new System.Drawing.Point(0, 183);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
-            this.label4.Size = new System.Drawing.Size(137, 36);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Total Balance:";
+            this.totalBalanceLabel.AutoSize = true;
+            this.totalBalanceLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.totalBalanceLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.totalBalanceLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalBalanceLabel.Location = new System.Drawing.Point(0, 183);
+            this.totalBalanceLabel.Name = "totalBalanceLabel";
+            this.totalBalanceLabel.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
+            this.totalBalanceLabel.Size = new System.Drawing.Size(137, 36);
+            this.totalBalanceLabel.TabIndex = 13;
+            this.totalBalanceLabel.Text = "Total Balance:";
             // 
-            // label3
+            // totalExpenseLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label3.Location = new System.Drawing.Point(0, 147);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
-            this.label3.Size = new System.Drawing.Size(137, 36);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Total Expense:";
+            this.totalExpenseLabel.AutoSize = true;
+            this.totalExpenseLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.totalExpenseLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.totalExpenseLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalExpenseLabel.Location = new System.Drawing.Point(0, 147);
+            this.totalExpenseLabel.Name = "totalExpenseLabel";
+            this.totalExpenseLabel.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
+            this.totalExpenseLabel.Size = new System.Drawing.Size(137, 36);
+            this.totalExpenseLabel.TabIndex = 12;
+            this.totalExpenseLabel.Text = "Total Expense:";
             // 
-            // label2
+            // previouAmountLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.Menu;
-            this.label2.Location = new System.Drawing.Point(0, 111);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
-            this.label2.Size = new System.Drawing.Size(162, 36);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Previous Amount:";
+            this.previouAmountLabel.AutoSize = true;
+            this.previouAmountLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.previouAmountLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.previouAmountLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.previouAmountLabel.Location = new System.Drawing.Point(0, 111);
+            this.previouAmountLabel.Name = "previouAmountLabel";
+            this.previouAmountLabel.Padding = new System.Windows.Forms.Padding(30, 15, 0, 0);
+            this.previouAmountLabel.Size = new System.Drawing.Size(162, 36);
+            this.previouAmountLabel.TabIndex = 11;
+            this.previouAmountLabel.Text = "Previous Amount:";
             // 
             // totalIncomeLabel
             // 
@@ -206,9 +206,9 @@ namespace HomeExpenseUI.Forms
             // panel2
             // 
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 231);
+            this.panel2.Location = new System.Drawing.Point(0, 281);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(800, 278);
+            this.panel2.Size = new System.Drawing.Size(800, 228);
             this.panel2.TabIndex = 1;
             // 
             // HomeForm
@@ -232,17 +232,17 @@ namespace HomeExpenseUI.Forms
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label totalBalamceValue;
+        private System.Windows.Forms.Label totalBalanceValue;
         private System.Windows.Forms.Label totalExpenseValue;
         private System.Windows.Forms.Label previousAmountValue;
-        private System.Windows.Forms.Label totalIncomeValue;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label totalBalanceLabel;
+        private System.Windows.Forms.Label totalExpenseLabel;
+        private System.Windows.Forms.Label previouAmountLabel;
         private System.Windows.Forms.Label totalIncomeLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button TestButton;
         private System.Windows.Forms.DateTimePicker dateTimePickerDate;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label totalIncomeValue;
     }
 }

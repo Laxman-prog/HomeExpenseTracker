@@ -139,5 +139,9 @@ namespace HomeExpenseUI
             OpenChildForm(incomeInsertion);
         }
 
+        private void showIncomeSubMenuButton_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new ShowIncomes(conn));
+        }
     }
 }

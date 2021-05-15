@@ -311,6 +311,7 @@ namespace HomeExpenseUI
             this.showIncomeSubMenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showIncomeSubMenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showIncomeSubMenuButton.UseVisualStyleBackColor = true;
+            this.showIncomeSubMenuButton.Click += new System.EventHandler(this.showIncomeSubMenuButton_Click);
             // 
             // addIncomeSubMenuButton
             // 

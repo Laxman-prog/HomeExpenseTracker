@@ -25,7 +25,7 @@ namespace HomeExpenseUI.Forms
             close
         }
 
-        public enum enmType
+        public enum AlertType
         {
             Success,
             Warning,
@@ -83,7 +83,7 @@ namespace HomeExpenseUI.Forms
             action = enmAction.close;
         }
 
-        public void showAlert(string msg, enmType type)
+        public void showAlert(string msg, AlertType type)
         {
             this.Opacity = 0.0;
             this.StartPosition = FormStartPosition.Manual;
@@ -109,19 +109,19 @@ namespace HomeExpenseUI.Forms
 
             switch (type)
             {
-                case enmType.Success:
+                case AlertType.Success:
                     this.alertImageBox.Image = Resources.success;
                     this.BackColor = Color.SeaGreen;
                     break;
-                case enmType.Error:
+                case AlertType.Error:
                     this.alertImageBox.Image = Resources.error;
                     this.BackColor = Color.DarkRed;
                     break;
-                case enmType.Info:
+                case AlertType.Info:
                     this.alertImageBox.Image = Resources.info;
                     this.BackColor = Color.RoyalBlue;
                     break;
-                case enmType.Warning:
+                case AlertType.Warning:
                     this.alertImageBox.Image = Resources.warning;
                     this.BackColor = Color.DarkOrange;
                     break;

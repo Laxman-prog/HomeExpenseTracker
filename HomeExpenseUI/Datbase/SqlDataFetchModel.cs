@@ -68,5 +68,28 @@ namespace HomeExpenseUI.Datbase
                 return null;
             }
         }
+
+        internal static bool  GetIncomedataBetweenTwoDates(SqlConnection sqlconnection, int id)
+        {
+            try
+            {
+                using (var cmd = sqlconnection.CreateCommand())
+                {
+                    sqlconnection.Open();
+                    cmd.CommandText = "DELETE FROM IncomeTable WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+        }
     }
 }

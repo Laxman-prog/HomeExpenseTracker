@@ -23,7 +23,7 @@ namespace HomeExpenseUI.Forms
         List<string> _sourceNameList = new();
         List<string> _sourceTypeList = new();
         bool _isIncomeType;
-        public void Alert(string msg, Form_Alert.enmType type)
+        public void Alert(string msg, Form_Alert.AlertType type)
         {
             Form_Alert frm = new Form_Alert();
             frm.showAlert(msg, type);
@@ -88,7 +88,7 @@ namespace HomeExpenseUI.Forms
         {
             if (addNewOptionTextBox.Text.Equals(string.Empty))
             {
-                this.Alert("Wrong input ", Form_Alert.enmType.Error);
+                this.Alert("Wrong input ", Form_Alert.AlertType.Error);
                 return;
             }
             bool isAdded;
@@ -106,7 +106,7 @@ namespace HomeExpenseUI.Forms
             }
             if (!isAdded)
             {
-                this.Alert("Insert Failed", Form_Alert.enmType.Error);
+                this.Alert("Insert Failed", Form_Alert.AlertType.Error);
             }
             ToggleOptonUI(false);
         }
@@ -136,7 +136,7 @@ namespace HomeExpenseUI.Forms
             string selectedIncomeType = (string)_sourceTypeDropdown.Items[typeIndex];
             if (nameIndex == -1 || typeIndex == -1|| incomeValueNumbox.Value==0)
             {
-                this.Alert("Wrong Input", Form_Alert.enmType.Error);
+                this.Alert("Wrong Input", Form_Alert.AlertType.Error);
                 return;
             }
 
@@ -144,7 +144,7 @@ namespace HomeExpenseUI.Forms
                selectedIncomeType, incomeDateTimePicker.Value, incomeValueNumbox.Text);
             if (isSuccess)
             {
-                this.Alert("Insert Success", Form_Alert.enmType.Success);
+                this.Alert("Insert Success", Form_Alert.AlertType.Success);
             }
         }
 
