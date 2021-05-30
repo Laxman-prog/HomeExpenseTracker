@@ -8,6 +8,7 @@
     <SignAssembly>false</SignAssembly>
     <DelaySign></DelaySign>
     <AssemblyOriginatorKeyFile />
+    <ApplicationIcon>Applogo.jpg.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

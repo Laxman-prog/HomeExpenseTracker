@@ -14,13 +14,15 @@ namespace HomeExpenseUI.Forms
 {
     public partial class ExpenseInsertion : Form
     {
-        SqlConnection conn;
+        SqlConnection _sqlConnection;
         List<string> _sourceNameList = new();
         List<string> _sourceTypeList = new();
         bool _isIncomeType;
-        public ExpenseInsertion(SqlConnection sqlConnection)
+        DashBoard _parentForm;
+        public ExpenseInsertion(SqlConnection sqlConnection, DashBoard parentForm)
         {
-            conn = sqlConnection;
+            _sqlConnection = sqlConnection;
+            _parentForm = parentForm;
             InitializeComponent();
         }
         public void Alert(string msg, Form_Alert.AlertType type)
@@ -34,20 +36,6 @@ namespace HomeExpenseUI.Forms
             addNewOptionButton.Visible = false;
             addNewOptionCancel.Visible = false;
             addNewOptionTextBox.Visible = false;
-            _sourceNameList = ExpenseDataModel.GetMenuNamesfromDb(conn, "SourceName");
-            if (_sourceNameList.Count != 0)
-            {
-                _expenseNameDropdown.Items.AddRange(items: _sourceNameList.ToArray());
-                _expenseNameDropdown.Items.Remove("Other");
-                _expenseNameDropdown.Items.Add("Other");
-            }
-            else
-            {
-                _expenseNameDropdown.Items.Add("Other");
-            }
-
-            _expenseNameDropdown.SelectedItem = null;
-            _expenseNameDropdown.SelectedText = "--Select--";
 
             //Source Type
             _expenseTypeDropdown.Items.Add("Home rent");
@@ -59,7 +47,7 @@ namespace HomeExpenseUI.Forms
             _expenseTypeDropdown.Items.Add("Gas");
             _expenseTypeDropdown.Items.Add("Party");
 
-            _sourceTypeList = ExpenseDataModel.GetMenuNamesfromDb(conn, "SourceType");
+            _sourceTypeList = ExpenseDataModel.GetMenuNamesfromDb(_sqlConnection, "SourceType");
             if (_sourceTypeList.Count == 0)
             {
                 _expenseTypeDropdown.Items.AddRange(_sourceTypeList.ToArray());
@@ -74,15 +62,6 @@ namespace HomeExpenseUI.Forms
             _expenseTypeDropdown.SelectedItem = null;
             _expenseTypeDropdown.SelectedText = "--Select--";
 
-        }
-
-        private void ExpenseNameDropdown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _isIncomeType = false;
-            if (_expenseNameDropdown.SelectedItem?.ToString() == "Other")
-            {
-                ToggleOptonUI(true);
-            }
         }
 
         private void ExpenseTypeDropdown_SelectedIndexChanged(object sender, EventArgs e)
@@ -108,19 +87,14 @@ namespace HomeExpenseUI.Forms
                 this.Alert("Wrong input ", Form_Alert.AlertType.Error);
                 return;
             }
-            bool isAdded;
+            bool isAdded = false;
             if (_isIncomeType)
             {
                 _expenseTypeDropdown.Items.Add(addNewOptionTextBox.Text);
                 BeginInvoke(new Action(() => _expenseTypeDropdown.Text = addNewOptionTextBox.Text));
-                isAdded= ExpenseDataModel.AddMenutoDb(conn, "Other", addNewOptionTextBox.Text);
+                isAdded= ExpenseDataModel.AddMenutoDb(_sqlConnection, "Other", addNewOptionTextBox.Text);
             }
-            else
-            {
-                _expenseNameDropdown.Items.Add(addNewOptionTextBox.Text);
-                BeginInvoke(new Action(() => _expenseNameDropdown.Text = addNewOptionTextBox.Text));
-                isAdded= ExpenseDataModel.AddMenutoDb(conn, addNewOptionTextBox.Text, "Other");
-            }
+     
             if(!isAdded)
             {
                 this.Alert("Insert Failed", Form_Alert.AlertType.Error);
@@ -131,18 +105,15 @@ namespace HomeExpenseUI.Forms
         private void SubmitExpenseButton_Click(object sender, EventArgs e)
         {
 
-            var nameIndex = _expenseNameDropdown.SelectedIndex;
-            string selectedIncomeName = (string)_expenseNameDropdown.Items[nameIndex];
-
             var typeIndex = _expenseTypeDropdown.SelectedIndex;
             string selectedIncomeType = (string)_expenseTypeDropdown.Items[typeIndex];
-            if (nameIndex == -1 || typeIndex == -1||expenseValueNumbox.Value<=0)
+            if (expenseName.Text == string.Empty || typeIndex == -1||expenseValueNumbox.Value<=0)
             {
                 this.Alert("Wrong input ", Form_Alert.AlertType.Error);
                 return;
             }
 
-            bool isSuccess = ExpenseDataModel.InsertExpenseDetailsToDb(conn, selectedIncomeName,
+            bool isSuccess = ExpenseDataModel.InsertExpenseDetailsToDb(_sqlConnection, expenseName.Text,
                selectedIncomeType, incomeDateTimePicker.Value, expenseValueNumbox.Text);
             if(isSuccess)
             {
@@ -154,14 +125,17 @@ namespace HomeExpenseUI.Forms
         {
             _expenseTypeDropdown.SelectedItem = null;
             _expenseTypeDropdown.SelectedText = "--Select--";
-            _expenseNameDropdown.SelectedItem = null;
-            _expenseNameDropdown.SelectedText = "--Select--";
             expenseValueNumbox.Value = 0;
         }
 
         private void AddNewOptionCancel_Click(object sender, EventArgs e)
         {
             ToggleOptonUI(false);
+        }
+
+        private void ShowExpenseButton_Click(object sender, EventArgs e)
+        {
+            _parentForm.OpenChildForm(new ExpenseBoard(_sqlConnection, _parentForm));
         }
     }
 }

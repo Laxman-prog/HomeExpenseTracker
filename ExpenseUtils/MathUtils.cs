@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExpenseUtils
 {
-    public  class MathUtils
+    public class MathUtils
     {
         public static int CalculateSum(List<int> values)
         {

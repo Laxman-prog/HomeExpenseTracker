@@ -16,16 +16,10 @@ namespace HomeExpenseUI.Datbase
             {
                 SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable VALUES (@UserName, @SourceName, @SourceType)", conn);
 
-                // SqlCommand insertCommand = new("INSERT INTO IncomeMenuTable (UserName, "+ columnName+") VALUES ('" + userName + "','" + menuName+"')", conn);
                 insertCommand.CommandType = CommandType.Text;
                 insertCommand.Parameters.AddWithValue("@UserName", userName);
                 insertCommand.Parameters.AddWithValue("@SourceName", sourcName);
                 insertCommand.Parameters.AddWithValue("@SourceType", sourceType);
-                //insertCommand.Parameters.AddWithValue("@Date", dateTime);
-                //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
-                //insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
-                //insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourcName;
-                //insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value = soutceType;
                 conn.Open();
                 insertCommand.ExecuteNonQuery();
                 return true;
@@ -79,12 +73,6 @@ namespace HomeExpenseUI.Datbase
             try
             {
                 SqlCommand insertCommand = new("INSERT INTO IncomeTable VALUES (@UserName, @SourceName, @SourceType, @Date, @MoneyValue)", conn);
-                //insertCommand.CommandType = CommandType.Text;
-                //insertCommand.Parameters.AddWithValue("@UserName", userName);
-                //insertCommand.Parameters.AddWithValue("@SourceName", sourceName);
-                //insertCommand.Parameters.AddWithValue("@SourceType", sourceType);
-                //insertCommand.Parameters.AddWithValue("@Date", dateTime);
-                //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
                 insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
                 insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourceName;
                 insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value =sourceType;
@@ -97,6 +85,29 @@ namespace HomeExpenseUI.Datbase
             catch (Exception )
             {
                
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        public static bool AddPreviousMonthAmountDetailToDb(SqlConnection conn, DateTime dateTime, string incomeValue)
+        {
+            var userName = LoginInfo.UserName;
+            try
+            {
+                SqlCommand insertCommand = new("INSERT INTO PreviousAmount VALUES (@UserName, @Date, @Amount)", conn);
+                insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
+                insertCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime;
+                insertCommand.Parameters.Add("@Amount", SqlDbType.VarChar).Value = incomeValue;
+                conn.Open();
+                insertCommand.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+
                 return false;
             }
             finally

@@ -1,7 +1,7 @@
 ﻿
 namespace HomeExpenseUI.Forms
 {
-    partial class IncomesBoard
+    partial class ExpenseBoard
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@ namespace HomeExpenseUI.Forms
             this.Edit = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.totalIncomeLabel = new System.Windows.Forms.Label();
+            this.totalExpleseLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.showIncomeDataGrid)).BeginInit();
             this.panel2.SuspendLayout();
@@ -55,7 +55,7 @@ namespace HomeExpenseUI.Forms
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 45);
-            this.panel1.TabIndex = 3;
+            this.panel1.TabIndex = 4;
             // 
             // dateTimePickerDate
             // 
@@ -79,10 +79,10 @@ namespace HomeExpenseUI.Forms
             this.showExpenseButton.Name = "showExpenseButton";
             this.showExpenseButton.Size = new System.Drawing.Size(143, 45);
             this.showExpenseButton.TabIndex = 11;
-            this.showExpenseButton.Text = "Add Incomes";
+            this.showExpenseButton.Text = "Add Expense";
             this.showExpenseButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showExpenseButton.UseVisualStyleBackColor = true;
-            this.showExpenseButton.Click += new System.EventHandler(this.AddIncomes);
+            this.showExpenseButton.Click += new System.EventHandler(this.ShowExpeses);
             // 
             // showIncomeDataGrid
             // 
@@ -101,19 +101,19 @@ namespace HomeExpenseUI.Forms
             this.showIncomeDataGrid.RowTemplate.Height = 25;
             this.showIncomeDataGrid.ShowEditingIcon = false;
             this.showIncomeDataGrid.Size = new System.Drawing.Size(800, 405);
-            this.showIncomeDataGrid.TabIndex = 4;
-            this.showIncomeDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ShowIncomeDataGridview_CellContentClick);
+            this.showIncomeDataGrid.TabIndex = 5;
+            this.showIncomeDataGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.showIncomeDataGrid_CellContentClick);
             // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "Source Name";
+            this.Column1.HeaderText = "Expense Name";
             this.Column1.Name = "Column1";
             // 
             // Column2
             // 
             this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Source Type";
+            this.Column2.HeaderText = "Expense Type";
             this.Column2.Name = "Column2";
             // 
             // Column3
@@ -153,25 +153,25 @@ namespace HomeExpenseUI.Forms
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.totalIncomeLabel);
+            this.panel2.Controls.Add(this.totalExpleseLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 406);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(800, 44);
-            this.panel2.TabIndex = 7;
+            this.panel2.TabIndex = 6;
             // 
-            // totalIncomeLabel
+            // totalExpleseLabel
             // 
-            this.totalIncomeLabel.AutoSize = true;
-            this.totalIncomeLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.totalIncomeLabel.ForeColor = System.Drawing.SystemColors.Menu;
-            this.totalIncomeLabel.Location = new System.Drawing.Point(506, 15);
-            this.totalIncomeLabel.Name = "totalIncomeLabel";
-            this.totalIncomeLabel.Size = new System.Drawing.Size(51, 20);
-            this.totalIncomeLabel.TabIndex = 0;
-            this.totalIncomeLabel.Text = "label1";
+            this.totalExpleseLabel.AutoSize = true;
+            this.totalExpleseLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.totalExpleseLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.totalExpleseLabel.Location = new System.Drawing.Point(506, 15);
+            this.totalExpleseLabel.Name = "totalExpleseLabel";
+            this.totalExpleseLabel.Size = new System.Drawing.Size(51, 20);
+            this.totalExpleseLabel.TabIndex = 0;
+            this.totalExpleseLabel.Text = "label1";
             // 
-            // IncomesBoard
+            // ExpenseBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -180,8 +180,8 @@ namespace HomeExpenseUI.Forms
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.showIncomeDataGrid);
             this.Controls.Add(this.panel1);
-            this.Name = "IncomesBoard";
-            this.Text = "ShowIncomes";
+            this.Name = "ExpenseBoard";
+            this.Text = "ExpenseBoard";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.showIncomeDataGrid)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -193,9 +193,9 @@ namespace HomeExpenseUI.Forms
         #endregion
 
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDate;
         private FontAwesome.Sharp.IconButton showExpenseButton;
         private System.Windows.Forms.DataGridView showIncomeDataGrid;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
@@ -204,6 +204,6 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.DataGridViewButtonColumn Edit;
         private System.Windows.Forms.DataGridViewButtonColumn Delete;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label totalIncomeLabel;
+        private System.Windows.Forms.Label totalExpleseLabel;
     }
 }

@@ -8,16 +8,17 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using ExpenseUtils;
 
 namespace HomeExpenseUI.Forms
 {
     public partial class IncomeInsertionForm : Form
     {
-        SqlConnection conn;
-        public IncomeInsertionForm(SqlConnection sqlConnection)
+        SqlConnection _sqlConnection;
+        DashBoard _parentForm;
+        public IncomeInsertionForm(SqlConnection sqlConnection, DashBoard parentForm)
         {
-            conn = sqlConnection;
+            _sqlConnection = sqlConnection;
+            _parentForm = parentForm;
             InitializeComponent();
         }
         List<string> _sourceNameList = new();
@@ -34,30 +35,19 @@ namespace HomeExpenseUI.Forms
             addNewOptionButton.Visible = false;
             addNewOptionCancel.Visible = false;
             addNewOptionTextBox.Visible = false;
-            IncomeDataModel incomeDataModel = new IncomeDataModel();
-            _sourceNameDropdown.Items.Add(LoginInfo.UserName);
-            _sourceNameList = incomeDataModel.GetMenuNamesfromDb(conn, "SourceName");
-            if (_sourceNameList.Count != 0)
-            {
-                _sourceNameDropdown.Items.AddRange(items: _sourceNameList.ToArray());
-                _sourceNameDropdown.Items.Remove("Other");
-                _sourceNameDropdown.Items.Add("Other");
-            }
-            else
-            {
-                _sourceNameDropdown.Items.Add("Other");
-            }
-      
-            _sourceNameDropdown.SelectedItem = null;
-            _sourceNameDropdown.SelectedText = "--Select--";
 
+            ToggglePreviousMonthUI(false);
+            previousAmoutLabel.Visible = false;
+            prevousAmountNumbox.Visible = false;
+            previousMonthAdd.Visible = false;
+            IncomeDataModel incomeDataModel = new IncomeDataModel();
             //Source Type
             _sourceTypeDropdown.Items.Add("Salary");
             _sourceTypeDropdown.Items.Add("Commission");
             _sourceTypeDropdown.Items.Add("Selling ");
             _sourceTypeDropdown.Items.Add("Gifts");
             _sourceTypeDropdown.Items.Add("Investments");
-            _sourceTypeList = incomeDataModel.GetMenuNamesfromDb(conn, "SourceType");
+            _sourceTypeList = incomeDataModel.GetMenuNamesfromDb(_sqlConnection, "SourceType");
             if (_sourceTypeList.Count == 0)
             {
                 _sourceTypeDropdown.Items.AddRange(_sourceTypeList.ToArray());
@@ -68,20 +58,10 @@ namespace HomeExpenseUI.Forms
             {
                 _sourceTypeDropdown.Items.Add("Other");
             }
-          
+
             _sourceTypeDropdown.SelectedItem = null;
             _sourceTypeDropdown.SelectedText = "--Select--";
 
-        }
-
-
-        private void SourceNameDropdown_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _isIncomeType = false;
-            if (_sourceNameDropdown.SelectedItem?.ToString() == "Other")
-            {
-                ToggleOptonUI(true);
-            }
         }
 
         private void AddNewOptionButton_Click(object sender, EventArgs e)
@@ -91,19 +71,14 @@ namespace HomeExpenseUI.Forms
                 this.Alert("Wrong input ", Form_Alert.AlertType.Error);
                 return;
             }
-            bool isAdded;
+            bool isAdded = false;
             if (_isIncomeType)
             {
-               _sourceTypeDropdown.Items.Add(addNewOptionTextBox.Text);
+                _sourceTypeDropdown.Items.Add(addNewOptionTextBox.Text);
                 BeginInvoke(new Action(() => _sourceTypeDropdown.Text = addNewOptionTextBox.Text));
-                isAdded= IncomeDataModel.AddMenutoDb(conn, "Other", addNewOptionTextBox.Text);
+                isAdded = IncomeDataModel.AddMenutoDb(_sqlConnection, "Other", addNewOptionTextBox.Text);
             }
-            else
-            {
-                _sourceNameDropdown.Items.Add(addNewOptionTextBox.Text);
-                BeginInvoke(new Action(() => _sourceNameDropdown.Text = addNewOptionTextBox.Text));
-                isAdded= IncomeDataModel.AddMenutoDb(conn, addNewOptionTextBox.Text, "Other");
-            }
+
             if (!isAdded)
             {
                 this.Alert("Insert Failed", Form_Alert.AlertType.Error);
@@ -129,18 +104,15 @@ namespace HomeExpenseUI.Forms
 
         private void SubmitIncomeButton_Click(object sender, EventArgs e)
         {
-            var nameIndex = _sourceNameDropdown.SelectedIndex;
-            string selectedIncomeName = (string)_sourceNameDropdown.Items[nameIndex];
-
             var typeIndex = _sourceTypeDropdown.SelectedIndex;
             string selectedIncomeType = (string)_sourceTypeDropdown.Items[typeIndex];
-            if (nameIndex == -1 || typeIndex == -1|| incomeValueNumbox.Value==0)
+            if (incomeName.Text == string.Empty || typeIndex == -1 || incomeValueNumbox.Value == 0)
             {
                 this.Alert("Wrong Input", Form_Alert.AlertType.Error);
                 return;
             }
 
-            bool isSuccess = IncomeDataModel.InsertIncomeDetailsToDb(conn, selectedIncomeName,
+            bool isSuccess = IncomeDataModel.InsertIncomeDetailsToDb(_sqlConnection, incomeName.Text,
                selectedIncomeType, incomeDateTimePicker.Value, incomeValueNumbox.Text);
             if (isSuccess)
             {
@@ -152,14 +124,58 @@ namespace HomeExpenseUI.Forms
         {
             _sourceTypeDropdown.SelectedItem = null;
             _sourceTypeDropdown.SelectedText = "--Select--";
-            _sourceNameDropdown.SelectedItem = null;
-            _sourceNameDropdown.SelectedText = "--Select--";
             incomeValueNumbox.Value = 0;
         }
 
         private void AddNewOptionCancel_Click(object sender, EventArgs e)
         {
             ToggleOptonUI(false);
+        }
+
+        private void ShowIcomeButton_Click(object sender, EventArgs e)
+        {
+            _parentForm.OpenChildForm(new IncomesBoard(_sqlConnection, _parentForm));
+        }
+
+        private void PreviousAmountButton_Click(object sender, EventArgs e)
+        {
+            ToggglePreviousMonthUI(true);
+        }
+        private void ToggglePreviousMonthUI(bool isHide)
+
+        {
+            previousAmoutLabel.Visible = isHide;
+            prevousAmountNumbox.Visible = isHide;
+            previousMonthAdd.Visible = isHide;
+            previousAmtDateLabel.Visible = isHide;
+            previousAmountDate.Visible = isHide;
+            previousAmountCancel.Visible = isHide;
+        }
+
+        private void PreviousMonthAdd_Click(object sender, EventArgs e)
+        {
+            if ( prevousAmountNumbox.Value == 0)
+            {
+                this.Alert("Wrong Input", Form_Alert.AlertType.Error);
+                return;
+            }
+
+            bool isSuccess = IncomeDataModel.AddPreviousMonthAmountDetailToDb(_sqlConnection, previousAmountDate.Value, prevousAmountNumbox.Text);
+            if (isSuccess)
+            {
+                this.Alert("Insert Success", Form_Alert.AlertType.Success);
+            }
+            ToggglePreviousMonthUI(false);
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PreviousAmountCancel_Click(object sender, EventArgs e)
+        {
+            ToggglePreviousMonthUI(false);
         }
     }
 }

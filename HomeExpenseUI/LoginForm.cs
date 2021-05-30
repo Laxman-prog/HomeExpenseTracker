@@ -1,6 +1,7 @@
 ﻿using HomeExpenseUI.Datbase;
 using HomeExpenseUI.Forms;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -17,7 +18,7 @@ namespace HomeExpenseUI
             countryListCombo.Items.AddRange(Localization.GetCountryList().ToArray());
             countryListCombo.SelectedItem = "India";
         }
-        public void Alert(string msg, Form_Alert.enmType type)
+        public void Alert(string msg, Form_Alert.AlertType type)
         {
             Form_Alert frm = new Form_Alert();
             frm.showAlert(msg, type);
@@ -33,7 +34,7 @@ namespace HomeExpenseUI
                 dashBoard.Show();
                 userNameTextBox.Clear();
                 passwordTextBox.Clear();
-                this.Alert("Success Alert", Form_Alert.enmType.Success);
+                this.Alert("Success Alert", Form_Alert.AlertType.Success);
             }
             else
             {
@@ -84,7 +85,7 @@ namespace HomeExpenseUI
 
         private void countryListCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+       
         }
     }
 }

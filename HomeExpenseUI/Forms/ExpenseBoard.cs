@@ -1,24 +1,29 @@
 ﻿using HomeExpenseUI.Datbase;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
-using System.Globalization;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HomeExpenseUI.Forms
 {
-    public partial class IncomesBoard : Form
+    public partial class ExpenseBoard : Form
     {
         SqlConnection _sqlconnection;
-        DashBoard _parentForm; 
-        public IncomesBoard(SqlConnection conn, DashBoard parentForm)
+        DashBoard _parentForm;
+        public ExpenseBoard(SqlConnection conn, DashBoard parentForm)
         {
             _sqlconnection = conn;
             InitializeComponent();
             _parentForm = parentForm;
-            LoadIncomes();
+            LoadExpenses();
         }
-        private void LoadIncomes()
+        private void LoadExpenses()
         {
 
             DateTime startDate = new(dateTimePickerDate.Value.Year, dateTimePickerDate.Value.Month, 1);
@@ -30,26 +35,27 @@ namespace HomeExpenseUI.Forms
             {
                 //Expense
                 int rowNumber = 0;
-                var rdr = SqlDataFetchModel.GetIncomedataBetweenTwoDates(_sqlconnection, startDate,
+                var rdr = SqlDataFetchModel.GetExpensedataBetweenTwoDates(_sqlconnection, startDate,
                     endDate);
                 List<double> totalExpenseList = new();
-                if(rdr is null) { ShowAlert("No Data Found", Form_Alert.AlertType.Warning); }
+                if (rdr is null) { ShowAlert("No Data Found", Form_Alert.AlertType.Warning); }
                 while (rdr.Read())
                 {
-                    var moneyValue =Int32.Parse(rdr.GetString(5));
+                    var moneyValue = Int32.Parse(rdr.GetString(5));
                     sum += moneyValue;
-                    string amount = currencySymbol + moneyValue;
-                    showIncomeDataGrid.Rows.Add(rdr.GetString(2), rdr.GetString(3), rdr.GetDateTime(4), amount,
+                    string moneyValueStr = currencySymbol + moneyValue;
+                    showIncomeDataGrid.Rows.Add(rdr.GetString(2), rdr.GetString(3), rdr.GetDateTime(4), moneyValueStr,
                         rdr.GetInt32(0));
                     rowNumber += 1;
+
                 }
-                totalIncomeLabel.Text = "Total Income:  " + currencySymbol + sum;
+                totalExpleseLabel.Text = "Total Expeses:  " + currencySymbol + sum;
                 _sqlconnection.Close();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message + "Stack\n" + e.StackTrace);
-                ShowAlert("No Income Found", Form_Alert.AlertType.Warning);
+                ShowAlert("No Expense Found", Form_Alert.AlertType.Warning);
             }
             finally
             {
@@ -57,20 +63,30 @@ namespace HomeExpenseUI.Forms
             }
 
         }
-
-        private void ShowIncomeDataGridview_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void ShowAlert(string msg, Form_Alert.AlertType alerType)
         {
+            Form_Alert frm = new();
+            frm.showAlert(msg, alerType);
+        }
 
+
+        private void ShowExpeses(object sender, EventArgs e)
+        {
+            _parentForm.OpenChildForm(new ExpenseInsertion(_sqlconnection, _parentForm));
+        }
+
+        private void showIncomeDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
             if (showIncomeDataGrid.Columns[e.ColumnIndex].Name == "Edit")
             {
-                
+
 
             }
             else if (showIncomeDataGrid.Columns[e.ColumnIndex].Name == "Delete")
             {
                 int id = (int)showIncomeDataGrid.CurrentRow.Cells["Id"].Value;
                 int rowNumber = showIncomeDataGrid.CurrentRow.Index;
-                if (SqlDataFetchModel.DeleteIncomeFromDb(_sqlconnection, id))
+                if (SqlDataFetchModel.DeleteExpenseFromDb(_sqlconnection, id))
                 {
                     ShowAlert("Deleted Success", Form_Alert.AlertType.Success);
                     showIncomeDataGrid.Rows.RemoveAt(rowNumber);
@@ -79,18 +95,6 @@ namespace HomeExpenseUI.Forms
                     ShowAlert("Unable To Delete", Form_Alert.AlertType.Error);
             }
 
-        }
-        private void ShowAlert( string msg, Form_Alert.AlertType alerType)
-        {
-            Form_Alert frm = new();
-            frm.showAlert(msg, alerType);
-        }
-
-        private void AddIncomes(object sender, EventArgs e)
-        {
-            var incomeInsertion = new IncomeInsertionForm(_sqlconnection,_parentForm);
-            _parentForm.OpenChildForm(incomeInsertion);
-            
         }
     }
 }
