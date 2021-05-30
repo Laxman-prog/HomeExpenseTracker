@@ -30,6 +30,7 @@ namespace HomeExpenseUI.Forms
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.previousAmountButton = new FontAwesome.Sharp.IconButton();
             this.showIcomeButton = new FontAwesome.Sharp.IconButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.incomeValueNumbox = new System.Windows.Forms.NumericUpDown();
@@ -41,26 +42,53 @@ namespace HomeExpenseUI.Forms
             this.submitIncomeButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this._sourceNameDropdown = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.previousAmountCancel = new System.Windows.Forms.Button();
+            this.previousAmtDateLabel = new System.Windows.Forms.Label();
+            this.previousAmountDate = new System.Windows.Forms.DateTimePicker();
+            this.prevousAmountNumbox = new System.Windows.Forms.NumericUpDown();
+            this.previousMonthAdd = new System.Windows.Forms.Button();
+            this.previousAmoutLabel = new System.Windows.Forms.Label();
             this.addNewOptionCancel = new System.Windows.Forms.Button();
             this.addNewOptionButton = new System.Windows.Forms.Button();
             this.addNewOption = new System.Windows.Forms.Label();
             this.addNewOptionTextBox = new System.Windows.Forms.TextBox();
+            this.incomeName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.incomeValueNumbox)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevousAmountNumbox)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.previousAmountButton);
             this.panel1.Controls.Add(this.showIcomeButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 45);
             this.panel1.TabIndex = 1;
+            // 
+            // previousAmountButton
+            // 
+            this.previousAmountButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.previousAmountButton.FlatAppearance.BorderSize = 0;
+            this.previousAmountButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.previousAmountButton.ForeColor = System.Drawing.SystemColors.Menu;
+            this.previousAmountButton.IconChar = FontAwesome.Sharp.IconChar.Plus;
+            this.previousAmountButton.IconColor = System.Drawing.Color.White;
+            this.previousAmountButton.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.previousAmountButton.IconSize = 36;
+            this.previousAmountButton.Location = new System.Drawing.Point(514, 0);
+            this.previousAmountButton.Name = "previousAmountButton";
+            this.previousAmountButton.Size = new System.Drawing.Size(143, 45);
+            this.previousAmountButton.TabIndex = 13;
+            this.previousAmountButton.Text = "Add Previous Amount";
+            this.previousAmountButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.previousAmountButton.UseVisualStyleBackColor = true;
+            this.previousAmountButton.Click += new System.EventHandler(this.PreviousAmountButton_Click);
             // 
             // showIcomeButton
             // 
@@ -79,9 +107,11 @@ namespace HomeExpenseUI.Forms
             this.showIcomeButton.Text = "Show Incomes";
             this.showIcomeButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showIcomeButton.UseVisualStyleBackColor = true;
+            this.showIcomeButton.Click += new System.EventHandler(this.ShowIcomeButton_Click);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.incomeName);
             this.panel2.Controls.Add(this.incomeValueNumbox);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this._sourceTypeDropdown);
@@ -91,7 +121,6 @@ namespace HomeExpenseUI.Forms
             this.panel2.Controls.Add(this.submitIncomeButton);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this._sourceNameDropdown);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
@@ -195,18 +224,14 @@ namespace HomeExpenseUI.Forms
             this.label1.TabIndex = 2;
             this.label1.Text = "Select Source";
             // 
-            // _sourceNameDropdown
-            // 
-            this._sourceNameDropdown.FormattingEnabled = true;
-            this._sourceNameDropdown.Location = new System.Drawing.Point(132, 83);
-            this._sourceNameDropdown.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this._sourceNameDropdown.Name = "_sourceNameDropdown";
-            this._sourceNameDropdown.Size = new System.Drawing.Size(182, 23);
-            this._sourceNameDropdown.TabIndex = 1;
-            this._sourceNameDropdown.SelectedIndexChanged += new System.EventHandler(this.SourceNameDropdown_SelectedIndexChanged);
-            // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.previousAmountCancel);
+            this.panel3.Controls.Add(this.previousAmtDateLabel);
+            this.panel3.Controls.Add(this.previousAmountDate);
+            this.panel3.Controls.Add(this.prevousAmountNumbox);
+            this.panel3.Controls.Add(this.previousMonthAdd);
+            this.panel3.Controls.Add(this.previousAmoutLabel);
             this.panel3.Controls.Add(this.addNewOptionCancel);
             this.panel3.Controls.Add(this.addNewOptionButton);
             this.panel3.Controls.Add(this.addNewOption);
@@ -217,11 +242,77 @@ namespace HomeExpenseUI.Forms
             this.panel3.Size = new System.Drawing.Size(425, 405);
             this.panel3.TabIndex = 3;
             // 
+            // previousAmountCancel
+            // 
+            this.previousAmountCancel.BackColor = System.Drawing.Color.SeaGreen;
+            this.previousAmountCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.previousAmountCancel.Location = new System.Drawing.Point(196, 126);
+            this.previousAmountCancel.Name = "previousAmountCancel";
+            this.previousAmountCancel.Size = new System.Drawing.Size(100, 32);
+            this.previousAmountCancel.TabIndex = 14;
+            this.previousAmountCancel.Text = "Cancel";
+            this.previousAmountCancel.UseVisualStyleBackColor = false;
+            this.previousAmountCancel.Click += new System.EventHandler(this.PreviousAmountCancel_Click);
+            // 
+            // previousAmtDateLabel
+            // 
+            this.previousAmtDateLabel.AutoSize = true;
+            this.previousAmtDateLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.previousAmtDateLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.previousAmtDateLabel.Location = new System.Drawing.Point(16, 83);
+            this.previousAmtDateLabel.Name = "previousAmtDateLabel";
+            this.previousAmtDateLabel.Size = new System.Drawing.Size(35, 17);
+            this.previousAmtDateLabel.TabIndex = 13;
+            this.previousAmtDateLabel.Text = "Date";
+            this.previousAmtDateLabel.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // previousAmountDate
+            // 
+            this.previousAmountDate.Location = new System.Drawing.Point(74, 79);
+            this.previousAmountDate.Name = "previousAmountDate";
+            this.previousAmountDate.Size = new System.Drawing.Size(182, 23);
+            this.previousAmountDate.TabIndex = 11;
+            // 
+            // prevousAmountNumbox
+            // 
+            this.prevousAmountNumbox.Location = new System.Drawing.Point(74, 37);
+            this.prevousAmountNumbox.Maximum = new decimal(new int[] {
+            1215752192,
+            23,
+            0,
+            0});
+            this.prevousAmountNumbox.Name = "prevousAmountNumbox";
+            this.prevousAmountNumbox.Size = new System.Drawing.Size(182, 23);
+            this.prevousAmountNumbox.TabIndex = 11;
+            // 
+            // previousMonthAdd
+            // 
+            this.previousMonthAdd.BackColor = System.Drawing.Color.SeaGreen;
+            this.previousMonthAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.previousMonthAdd.Location = new System.Drawing.Point(74, 126);
+            this.previousMonthAdd.Name = "previousMonthAdd";
+            this.previousMonthAdd.Size = new System.Drawing.Size(100, 32);
+            this.previousMonthAdd.TabIndex = 12;
+            this.previousMonthAdd.Text = "Add";
+            this.previousMonthAdd.UseVisualStyleBackColor = false;
+            this.previousMonthAdd.Click += new System.EventHandler(this.PreviousMonthAdd_Click);
+            // 
+            // previousAmoutLabel
+            // 
+            this.previousAmoutLabel.AutoSize = true;
+            this.previousAmoutLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.previousAmoutLabel.ForeColor = System.Drawing.SystemColors.Menu;
+            this.previousAmoutLabel.Location = new System.Drawing.Point(42, 9);
+            this.previousAmoutLabel.Name = "previousAmoutLabel";
+            this.previousAmoutLabel.Size = new System.Drawing.Size(241, 17);
+            this.previousAmoutLabel.TabIndex = 11;
+            this.previousAmoutLabel.Text = "Add Previous Month Remaining Amount";
+            // 
             // addNewOptionCancel
             // 
             this.addNewOptionCancel.BackColor = System.Drawing.Color.SeaGreen;
             this.addNewOptionCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addNewOptionCancel.Location = new System.Drawing.Point(179, 153);
+            this.addNewOptionCancel.Location = new System.Drawing.Point(183, 233);
             this.addNewOptionCancel.Name = "addNewOptionCancel";
             this.addNewOptionCancel.Size = new System.Drawing.Size(100, 32);
             this.addNewOptionCancel.TabIndex = 9;
@@ -233,7 +324,7 @@ namespace HomeExpenseUI.Forms
             // 
             this.addNewOptionButton.BackColor = System.Drawing.Color.SeaGreen;
             this.addNewOptionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addNewOptionButton.Location = new System.Drawing.Point(42, 153);
+            this.addNewOptionButton.Location = new System.Drawing.Point(42, 233);
             this.addNewOptionButton.Name = "addNewOptionButton";
             this.addNewOptionButton.Size = new System.Drawing.Size(100, 32);
             this.addNewOptionButton.TabIndex = 8;
@@ -246,7 +337,7 @@ namespace HomeExpenseUI.Forms
             this.addNewOption.AutoSize = true;
             this.addNewOption.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.addNewOption.ForeColor = System.Drawing.SystemColors.Menu;
-            this.addNewOption.Location = new System.Drawing.Point(10, 91);
+            this.addNewOption.Location = new System.Drawing.Point(6, 192);
             this.addNewOption.Name = "addNewOption";
             this.addNewOption.Size = new System.Drawing.Size(43, 17);
             this.addNewOption.TabIndex = 8;
@@ -254,10 +345,17 @@ namespace HomeExpenseUI.Forms
             // 
             // addNewOptionTextBox
             // 
-            this.addNewOptionTextBox.Location = new System.Drawing.Point(74, 91);
+            this.addNewOptionTextBox.Location = new System.Drawing.Point(74, 191);
             this.addNewOptionTextBox.Name = "addNewOptionTextBox";
             this.addNewOptionTextBox.Size = new System.Drawing.Size(182, 23);
             this.addNewOptionTextBox.TabIndex = 8;
+            // 
+            // incomeName
+            // 
+            this.incomeName.Location = new System.Drawing.Point(132, 85);
+            this.incomeName.Name = "incomeName";
+            this.incomeName.Size = new System.Drawing.Size(182, 23);
+            this.incomeName.TabIndex = 15;
             // 
             // IncomeInsertionForm
             // 
@@ -277,6 +375,7 @@ namespace HomeExpenseUI.Forms
             ((System.ComponentModel.ISupportInitialize)(this.incomeValueNumbox)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevousAmountNumbox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -291,7 +390,6 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.Button submitIncomeButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox _sourceNameDropdown;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button addNewOptionCancel;
         private System.Windows.Forms.Button addNewOptionButton;
@@ -301,5 +399,13 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.ComboBox _sourceTypeDropdown;
         private FontAwesome.Sharp.IconButton showIcomeButton;
         private System.Windows.Forms.NumericUpDown incomeValueNumbox;
+        private FontAwesome.Sharp.IconButton previousAmountButton;
+        private System.Windows.Forms.NumericUpDown prevousAmountNumbox;
+        private System.Windows.Forms.Button previousMonthAdd;
+        private System.Windows.Forms.Label previousAmoutLabel;
+        private System.Windows.Forms.Label previousAmtDateLabel;
+        private System.Windows.Forms.DateTimePicker previousAmountDate;
+        private System.Windows.Forms.Button previousAmountCancel;
+        private System.Windows.Forms.TextBox incomeName;
     }
 }

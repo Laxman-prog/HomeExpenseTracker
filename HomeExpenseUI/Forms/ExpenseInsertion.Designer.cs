@@ -41,12 +41,12 @@ namespace HomeExpenseUI.Forms
             this.submitExpenseButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this._expenseNameDropdown = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.addNewOptionCancel = new System.Windows.Forms.Button();
             this.addNewOptionButton = new System.Windows.Forms.Button();
             this.addNewOption = new System.Windows.Forms.Label();
             this.addNewOptionTextBox = new System.Windows.Forms.TextBox();
+            this.expenseName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expenseValueNumbox)).BeginInit();
@@ -79,9 +79,11 @@ namespace HomeExpenseUI.Forms
             this.showExpenseButton.Text = "Show Expenses";
             this.showExpenseButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showExpenseButton.UseVisualStyleBackColor = true;
+            this.showExpenseButton.Click += new System.EventHandler(this.ShowExpenseButton_Click);
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.expenseName);
             this.panel2.Controls.Add(this.expenseValueNumbox);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this._expenseTypeDropdown);
@@ -91,7 +93,6 @@ namespace HomeExpenseUI.Forms
             this.panel2.Controls.Add(this.submitExpenseButton);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this._expenseNameDropdown);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 45);
             this.panel2.Name = "panel2";
@@ -197,16 +198,6 @@ namespace HomeExpenseUI.Forms
             this.label1.TabIndex = 2;
             this.label1.Text = "Expense Name";
             // 
-            // _expenseNameDropdown
-            // 
-            this._expenseNameDropdown.FormattingEnabled = true;
-            this._expenseNameDropdown.Location = new System.Drawing.Point(132, 83);
-            this._expenseNameDropdown.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
-            this._expenseNameDropdown.Name = "_expenseNameDropdown";
-            this._expenseNameDropdown.Size = new System.Drawing.Size(182, 23);
-            this._expenseNameDropdown.TabIndex = 1;
-            this._expenseNameDropdown.SelectedIndexChanged += new System.EventHandler(this.ExpenseNameDropdown_SelectedIndexChanged);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.addNewOptionCancel);
@@ -263,6 +254,13 @@ namespace HomeExpenseUI.Forms
             this.addNewOptionTextBox.Size = new System.Drawing.Size(182, 23);
             this.addNewOptionTextBox.TabIndex = 8;
             // 
+            // expenseName
+            // 
+            this.expenseName.Location = new System.Drawing.Point(132, 83);
+            this.expenseName.Name = "expenseName";
+            this.expenseName.Size = new System.Drawing.Size(182, 23);
+            this.expenseName.TabIndex = 10;
+            // 
             // ExpenseInsertion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -297,7 +295,6 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.Button submitExpenseButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox _expenseNameDropdown;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button addNewOptionCancel;
         private System.Windows.Forms.Button addNewOptionButton;
@@ -305,5 +302,6 @@ namespace HomeExpenseUI.Forms
         private System.Windows.Forms.TextBox addNewOptionTextBox;
         private FontAwesome.Sharp.IconButton showExpenseButton;
         private System.Windows.Forms.NumericUpDown expenseValueNumbox;
+        private System.Windows.Forms.TextBox expenseName;
     }
 }

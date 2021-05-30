@@ -72,13 +72,13 @@ namespace HomeExpenseUI.Datbase
         }
 
 
-        internal static bool InsertExpenseDetailsToDb(SqlConnection conn, string sourceName, string sourceType,
+        internal static bool InsertExpenseDetailsToDb(SqlConnection conn, string expenseName, string expenseType,
             DateTime dateTime, string incomeValue)
         {
             var userName = LoginInfo.UserName;
             try
             {
-                SqlCommand insertCommand = new("INSERT INTO ExpenseTable VALUES (@UserName, @SourceName, @SourceType, @Date, @MoneyValue)", conn);
+                SqlCommand insertCommand = new("INSERT INTO ExpenseTable VALUES (@UserName, @ExpenseName, @ExpenseType, @Date, @MoneyValue)", conn);
                 //insertCommand.CommandType = CommandType.Text;
                 //insertCommand.Parameters.AddWithValue("@UserName", userName);
                 //insertCommand.Parameters.AddWithValue("@SourceName", sourceName);
@@ -86,16 +86,17 @@ namespace HomeExpenseUI.Datbase
                 //insertCommand.Parameters.AddWithValue("@Date", dateTime);
                 //insertCommand.Parameters.AddWithValue("@MoneyValue", incomeValue);
                 insertCommand.Parameters.Add("@UserName", SqlDbType.VarChar).Value = userName;
-                insertCommand.Parameters.Add("@SourceName", SqlDbType.VarChar).Value = sourceName;
-                insertCommand.Parameters.Add("@SourceType", SqlDbType.VarChar).Value = sourceType;
+                insertCommand.Parameters.Add("@ExpenseName", SqlDbType.VarChar).Value = expenseName;
+                insertCommand.Parameters.Add("@ExpenseType", SqlDbType.VarChar).Value = expenseType;
                 insertCommand.Parameters.Add("@Date", SqlDbType.DateTime).Value = dateTime;
                 insertCommand.Parameters.Add("@MoneyValue", SqlDbType.VarChar).Value = incomeValue;
                 conn.Open();
                 insertCommand.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message + "Stacj" + e.StackTrace);
                 return false;
             }
             finally

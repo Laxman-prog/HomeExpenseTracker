@@ -45,7 +45,6 @@ namespace HomeExpenseUI
             this.addIncomeSubMenuButton = new FontAwesome.Sharp.IconButton();
             this.icomeMenuButton = new FontAwesome.Sharp.IconButton();
             this.panelLogo = new System.Windows.Forms.Panel();
-            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.appName = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -55,12 +54,12 @@ namespace HomeExpenseUI
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelDektop = new System.Windows.Forms.Panel();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panelSideview.SuspendLayout();
             this.reportPnael.SuspendLayout();
             this.expensePanel.SuspendLayout();
             this.incomePanel.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.panel3.SuspendLayout();
             this.panelDektop.SuspendLayout();
             this.SuspendLayout();
@@ -158,7 +157,7 @@ namespace HomeExpenseUI
             this.montlyReportSubmenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.montlyReportSubmenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.montlyReportSubmenuButton.UseVisualStyleBackColor = true;
-            this.montlyReportSubmenuButton.Click += new System.EventHandler(this.montlyReportSubmenuButton_Click);
+            this.montlyReportSubmenuButton.Click += new System.EventHandler(this.MontlyReportSubmenuButton_Click);
             // 
             // todaysReportSubmenuButton
             // 
@@ -235,6 +234,7 @@ namespace HomeExpenseUI
             this.showExpenseSubmenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showExpenseSubmenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showExpenseSubmenuButton.UseVisualStyleBackColor = true;
+            this.showExpenseSubmenuButton.Click += new System.EventHandler(this.ShowExpenseSubmenuButton_Click);
             // 
             // addExpenseSubmenuButton
             // 
@@ -311,7 +311,7 @@ namespace HomeExpenseUI
             this.showIncomeSubMenuButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.showIncomeSubMenuButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.showIncomeSubMenuButton.UseVisualStyleBackColor = true;
-            this.showIncomeSubMenuButton.Click += new System.EventHandler(this.showIncomeSubMenuButton_Click);
+            this.showIncomeSubMenuButton.Click += new System.EventHandler(this.ShowIncomeSubMenuButton_Click);
             // 
             // addIncomeSubMenuButton
             // 
@@ -359,29 +359,13 @@ namespace HomeExpenseUI
             // 
             // panelLogo
             // 
-            this.panelLogo.Controls.Add(this.iconPictureBox1);
+            this.panelLogo.Controls.Add(this.iconButton1);
             this.panelLogo.Controls.Add(this.appName);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
             this.panelLogo.Name = "panelLogo";
             this.panelLogo.Size = new System.Drawing.Size(250, 113);
             this.panelLogo.TabIndex = 0;
-            // 
-            // iconPictureBox1
-            // 
-            this.iconPictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.iconPictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
-            this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.RupeeSign;
-            this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlLight;
-            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 76;
-            this.iconPictureBox1.Location = new System.Drawing.Point(62, 37);
-            this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Size = new System.Drawing.Size(86, 76);
-            this.iconPictureBox1.TabIndex = 1;
-            this.iconPictureBox1.TabStop = false;
-            this.iconPictureBox1.Click += new System.EventHandler(this.AppIconPictureBox_Click);
             // 
             // appName
             // 
@@ -506,6 +490,22 @@ namespace HomeExpenseUI
             this.panelDektop.Size = new System.Drawing.Size(698, 519);
             this.panelDektop.TabIndex = 3;
             // 
+            // iconButton1
+            // 
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.ForeColor = System.Drawing.SystemColors.MenuBar;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.RupeeSign;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 64;
+            this.iconButton1.Location = new System.Drawing.Point(62, 49);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(99, 58);
+            this.iconButton1.TabIndex = 2;
+            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconButton1.Click += new System.EventHandler(this.AppIconButton_Click);
+            // 
             // DashBoard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -526,7 +526,6 @@ namespace HomeExpenseUI
             this.incomePanel.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panelDektop.ResumeLayout(false);
@@ -556,12 +555,12 @@ namespace HomeExpenseUI
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label appName;
-        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private System.Windows.Forms.Panel panel1;
         private FontAwesome.Sharp.IconButton logOutButton;
         private System.Windows.Forms.Label userNameLabel;
         private FontAwesome.Sharp.IconButton currentformButton;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panelDektop;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

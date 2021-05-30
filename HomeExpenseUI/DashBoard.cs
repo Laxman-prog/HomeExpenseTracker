@@ -1,4 +1,5 @@
-﻿using HomeExpenseUI.Datbase;
+﻿using FontAwesome.Sharp;
+using HomeExpenseUI.Datbase;
 using HomeExpenseUI.Forms;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace HomeExpenseUI
     {
         readonly SqlConnection conn;
         readonly Form _parentForm;
-        private Form currentChildForm; 
+        private Form currentChildForm;
+        IconButton currentButton;
         public DashBoard(Form parentForm)
         {
             _parentForm = parentForm;
@@ -34,8 +36,39 @@ namespace HomeExpenseUI
             expensePanel.Visible = false;
             reportPnael.Visible = false;
         }
+        private void ActivateButton(object senderButton)
+        {
+            var color = Color.FromArgb(249, 118, 178);
+            if(senderButton!=null)
+            {
+                DisableButton();
+                currentButton = (IconButton)senderButton;
+                currentButton.BackColor = Color.FromArgb(37, 36, 81);
+                currentButton.ForeColor = color;
+                currentButton.TextAlign = ContentAlignment.MiddleCenter;
+                currentButton.IconColor = color;
+                currentButton.TextImageRelation = TextImageRelation.TextBeforeImage;
+                currentButton.ImageAlign = ContentAlignment.MiddleRight;
 
-        private void OpenChildForm(Form childForm)
+                currentformButton.IconChar = currentButton.IconChar;
+                currentformButton.IconColor = color;
+
+            }
+        }
+        private void DisableButton()
+        {
+            if (currentButton != null)
+            {
+                currentButton.BackColor = Color.FromArgb(32, 34, 39);
+                currentButton.TextAlign = ContentAlignment.MiddleLeft;
+                currentButton.ForeColor = Color.FromArgb(240, 240, 240);
+                currentButton.IconColor = Color.Gainsboro;
+                currentButton.TextImageRelation = TextImageRelation.ImageBeforeText;
+                currentButton.ImageAlign = ContentAlignment.MiddleLeft;
+
+            }
+        }
+        internal void OpenChildForm(Form childForm)
         {
             if (currentChildForm != null)
             {
@@ -101,17 +134,21 @@ namespace HomeExpenseUI
 
         private void AddIncomeSubMenuButton_Click(object sender, EventArgs e)
         {
-            var incomeInsertion = new IncomeInsertionForm(conn);
+
+            ActivateButton(sender);
+            var incomeInsertion = new IncomeInsertionForm(conn,this);
             OpenChildForm(incomeInsertion);
         }
 
         private void todaysReportSubmenuButton_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             OpenChildForm(new DailyReportForm());
         }
 
-        private void montlyReportSubmenuButton_Click(object sender, EventArgs e)
+        private void MontlyReportSubmenuButton_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
             OpenChildForm(new MontlyReportForm());
         }
 
@@ -125,11 +162,25 @@ namespace HomeExpenseUI
 
         private void AddExpenseSubmenuButton_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new ExpenseInsertion(conn));
+            ActivateButton(sender);
+            OpenChildForm(new ExpenseInsertion(conn,this));
         }
 
-        private void AppIconPictureBox_Click(object sender, EventArgs e)
+        private void ShowIncomeSubMenuButton_Click(object sender, EventArgs e)
         {
+            ActivateButton(sender);
+            OpenChildForm(new IncomesBoard(conn,this));
+        }
+
+        private void ShowExpenseSubmenuButton_Click(object sender, EventArgs e)
+        {
+              ActivateButton(sender);
+            OpenChildForm(new ExpenseBoard(conn, this));
+        }
+
+        private void AppIconButton_Click(object sender, EventArgs e)
+        {
+            DisableButton();
             if (currentChildForm != null)
             {
                 currentChildForm.Close();
@@ -137,11 +188,8 @@ namespace HomeExpenseUI
             currentformButton.Text = "Home";
             var incomeInsertion = new HomeForm(conn);
             OpenChildForm(incomeInsertion);
-        }
-
-        private void showIncomeSubMenuButton_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new ShowIncomes(conn));
+            currentformButton.IconChar = IconChar.Home;
+            currentformButton.IconColor = Color.Gainsboro;
         }
     }
 }
